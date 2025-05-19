@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CineBot | Películas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+header {
+  position: relative;
+  background: url('banner.png') no-repeat center center;
+  background-size: cover;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: #fff;
+  z-index: 1;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+  z-index: 0;
+}
+
+header h1,
+header p {
+  z-index: 1;
+}
+
+
+    nav {
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: #0d1b2a;
+      text-decoration: none;
+      margin: 0 1.5rem;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #e50914;
+    }
+
+    header {
+      background: url('/mnt/data/b66e9101-cbac-4547-92c4-273346899f98.png') no-repeat center center;
+      background-size: cover;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: #fff;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.1rem;
+    }
+
+    section {
+      padding: 2rem;
+    }
+
+    h2 {
+      border-left: 5px solid #e50914;
+      padding-left: 10px;
+      margin-bottom: 1rem;
+      color: #e50914;
+    }
+
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 1rem;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .movie-card {
+      flex: 0 0 auto;
+      width: 220px;
+      background-color: #222;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .movie-card .info {
+      padding: 0.5rem;
+    }
+
+    .movie-card p {
+      margin: 0.2rem 0;
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 35%;
+      background: rgba(0,0,0,0.7);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 1;
+      padding: 0 10px;
+    }
+
+    .nav-left { left: 0; }
+    .nav-right { right: 0; }
+
+    footer {
+      background: #000;
+      color: #aaa;
+      padding: 2rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#recomendadas">Películas</a>
+  <a href="#estrenos">Estrenos</a>
+  <a href="#generos">Géneros</a>
+  <a href="#Proximamente">Proximamente</a>
+</nav>
+
+<header>
+  <h1>🎬 CineBot</h1>
+  <p>Tu asistente virtual para elegir la película perfecta</p>
+</header>
+
+<section id="recomendadas">
+  <h2>Estrenos Recientes</h2>
+  <div class="carousel-container">
+<button class="nav-arrow nav-left" 
+  style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, -1)">‹</button>
+    <div class="carousel">
+      <!-- Repite hasta 8 películas, aquí van 6 de ejemplo -->
+      <div class="movie-card">
+<img src="foto1.png"/>
+<div class="info">
+<p><strong>Título:</strong> Kayara: La Princesa Inca</p>
+<p><strong>Sinopsis:</strong> En el Imperio Inca, Kayara, una joven valiente, desafía las tradiciones para convertirse en la primera mujer mensajera del emperador.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="foto2.png"/>
+<div class="info">
+<p><strong>Título:</strong> Lilo y Stitch (Live Action)</p>
+<p><strong>Sinopsis:</strong> Una niña hawaiana solitaria adopta a Stitch, un alienígena fugitivo, y juntos descubren el verdadero significado de la familia.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="foto3.png"/>
+<div class="info">
+<p><strong>Título:</strong> Destino Final: Lazos de Sangre</p>
+<p><strong>Sinopsis:</strong> Stefani, una universitaria atormentada por pesadillas, descubre que su familia está marcada por una maldición mortal que ha perseguido a generaciones desde 1968. Ahora, debe encontrar la forma de romper el ciclo antes de que la Muerte los alcance a todos.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="foto4.png"/>
+<div class="info">
+<p><strong>Título:</strong> Mamá Reinventada</p>
+<p><strong>Sinopsis:</strong>Tras enviudar, Patricia se muda con su hija Marina y su roomie, iniciando un viaje de redescubrimiento personal y fortalecimiento de la relación madre-hija.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="foto5.png"/>
+<div class="info">
+<p><strong>Título:</strong> Una Película de Minecraft</p>
+<p><strong>Sinopsis:</strong> Cuatro inadaptados son transportados al Overworld, un mundo cúbico donde la creatividad es clave para sobrevivir. Junto a Steve, un experto artesano, deben enfrentar desafíos para regresar a casa.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="foto6.png"/>
+<div class="info">
+<p><strong>Título:</strong>  Kenia OS: La OG</p>
+<p><strong>Sinopsis:</strong> Documental que muestra la evolución artística de Kenia OS, destacando su preparación y presentación en el Palacio de los Deportes de la Ciudad de México, reflejando su impacto en la música pop mexicana.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="foto7.png"/>
+<div class="info">
+<p><strong>Título:</strong> Thunderbolts (también conocida como Los Nuevos Vengadores)</p>
+<p><strong>Sinopsis:</strong> Un grupo de antihéroes marginados es reclutado por Valentina de Fontaine para una misión suicida que los obliga a enfrentar su pasado y redimirse como un nuevo equipo.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="foto8.png"/>
+<div class="info">
+<p><strong>Título:</strong> Memorias de un caracol </p>
+<p><strong>Sinopsis:</strong> Grace Pudel, una niña solitaria en el Melbourne de los años 70, enfrenta la muerte de su padre y la separación de su hermano gemelo.</p>
+</div>
+</div>
+</div>
+
+<button class="nav-arrow nav-right" 
+  style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, 1)">›</button>
+  </div>
+</section>
+
+
+<section id="estrenos">
+  <h2> Recién Agregadas</h2>
+  <div class="carousel-container">
+<button class="nav-arrow nav-left" 
+  style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, -1)">‹</button>
+    <div class="carousel">
+      <div class="movie-card">
+<img src="p1.png"/>
+<div class="info">
+<p><strong>Título:</strong> Cónclave</p>
+<p><strong>Sinopsis:</strong> Tras la muerte del Papa, el cardenal Thomas Lawrence es designado para dirigir el cónclave que elegirá a su sucesor. Mientras los cardenales se encierran en el Vaticano, Lawrence descubre secretos que podrían sacudir los cimientos de la Iglesia.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="p2.png"/>
+<div class="info">
+<p><strong>Título:</strong> Wicked </p>
+<p><strong>Sinopsis:</strong> Esta película musical de fantasía estadounidense dirigida por Jon M. Chu continúa la historia de Elphaba y Glinda mientras enfrentan las consecuencias de sus decisiones en el mundo de Oz. </p>
+</div>
+</div>
+<div class="movie-card">
+<img src="p3.png"/>
+<div class="info">
+<p><strong>Título:</strong> Karol G: Mañana Fue Muy Bonito</p>
+<p><strong>Sinopsis:</strong> Este documental de Netflix ofrece una mirada íntima a la vida y carrera de Karol G, mostrando su ascenso al estrellato, los desafíos personales y profesionales que enfrentó durante su gira mundial Mañana Será Bonito, y su proceso de autodescubrimiento y empoderamiento. </p>
+</div>
+</div>
+<div class="movie-card">
+<img src="p4.png"/>
+<div class="info">
+<p><strong>Título:</strong> Jurado Nº 2</p>
+<p><strong>Sinopsis:</strong> Justin Kemp, un hombre de familia, forma parte de un jurado en un juicio por asesinato. Durante el proceso, descubre que podría ser responsable del crimen, enfrentándose a un dilema moral que podría influir en el veredicto del jurado y potencialmente condenar o liberar al acusado.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="p5.png"/>
+<div class="info">
+<p><strong>Título:</strong> Danna: Tenemos que hablar</p>
+<p><strong>Sinopsis:</strong>  Documental biográfico de la cantante mexicana Danna Paola, donde comparte su trayectoria desde la infancia hasta su transformación artística y personal. Explora su paso por la fama, los desafíos enfrentados y su proceso de reinvención en la industria del entretenimiento.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="p6.png"/>
+<div class="info">
+<p><strong>Título:</strong> Deadpool y Wolverine</p>
+<p><strong>Sinopsis:</strong> Deadpool y Wolverine, dos mutantes con personalidades muy distintas, se ven obligados a colaborar en una misión peligrosa que pone a prueba su relación y habilidades únicas.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="p7.png"/>
+<div class="info">
+<p><strong>Título:</strong> Robot Salvaje</p>
+<p><strong>Sinopsis:</strong> Un robot llamado Roz despierta en una isla desierta y debe aprender a sobrevivir en la naturaleza mientras forma vínculos con los animales locales.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="p8.png"/>
+<div class="info">
+<p><strong>Título:</strong>  La Sustancia</p>
+<p><strong>Sinopsis:</strong> Elisabeth Sparkle, una actriz en decadencia, recurre a una misteriosa sustancia que promete rejuvenecerla, generando una versión más joven de sí misma llamada Sue. Sin embargo, este experimento desencadena consecuencias inesperadas y aterradoras.</p>
+</div>
+</div>
+</div>
+
+<button class="nav-arrow nav-right" 
+  style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, 1)">›</button>  </div>
+</section>
+
+<section id="generos">
+  <h2>Por Género</h2>
+  <p>Explora películas según lo que tengas ganas de ver hoy.</p>
+
+  <h3>Animación y fantasía</h3>
+  <div class="carousel-container">
+<button class="nav-arrow nav-left" 
+  style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, -1)">‹</button>
+    <div class="carousel">
+      <!-- Repite hasta 8 películas, aquí van 6 de ejemplo -->
+      <div class="movie-card">
+<img src="f1.png"/>
+<div class="info">
+<p><strong>Título:</strong> Moana 2</p>
+<p><strong>Sinopsis:</strong> Tres años después de su aventura con el semidiós Maui y la diosa de la isla Te Fiti, Moana pasa sus días explorando otras islas cerca de su isla natal de Motunui con la esperanza de encontrar personas conectadas con el océano</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="f2.png"/>
+<div class="info">
+<p><strong>Título:</strong> MYHERO ACADEMIA (YOURE NEXT)</p>
+<p><strong>Sinopsis:</strong> Después de la Guerra de Liberación Paranormal, Izuku Midoriya y sus compañeros de la Clase 1-A se unen para ayudar a los Héroes a rastrear a los Jailbreakers que han proliferado en Japón. Sin embargo, se encuentran con más problemas de los que esperaban cuando tienen que detener una misteriosa fortaleza gigante y a un hombre que se parece al antiguo "Símbolo de la Paz".</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="f3.png"/>
+<div class="info">
+<p><strong>Título:</strong> Spider Man (Atraves del multiverso)</p>
+<p><strong>Sinopsis:</strong>Miles regresa para un nuevo capítulo de esta galardonada saga donde deberá reevaluar el significado de ser héroe cuando es obligado a enfrentar a todo un equipo de héroes arácnidos encargados de proteger la existencia misma del Multiverso.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="f4.png"/>
+<div class="info">
+<p><strong>Título:</strong> Intensamente 2</p>
+<p><strong>Sinopsis:</strong> Dos años después de su traslado a San Francisco, Riley Andersen, de 13 años, entra en el instituto. Sus emociones personificadas. Alegría, Tristeza, Miedo, Asco e Ira supervisan ahora un elemento recién formado de la mente de Riley llamado «Sentido del Yo», que alberga recuerdos y sentimientos que conforman las creencias de Riley. Alegría, con el objetivo de llenar el Sentido del Yo sólo con recuerdos positivos, ha creado un mecanismo que lanza los recuerdos negativos al fondo de la mente de Riley.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="f5.png"/>
+<div class="info">
+<p><strong>Título:</strong> Ligtyear</p>
+<p><strong>Sinopsis:</strong> La aventura de acción y ciencia ficción presenta la historia de origen definitiva de Buzz Lightyear, el héroe que inspiró el juguete, presentando al legendario Guardián Espacial que ganaría generaciones de fanáticos.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="f6.png"/>
+<div class="info">
+<p><strong>Título:</strong> Violet Ever </p>
+<p><strong>Sinopsis:</strong> El nombre de la niña que escribe en nombre de los demás es "Violet Evergarden".
+Han pasado varios años desde el final de la guerra que había herido profundamente a personas.
+El mundo está recuperando gradualmente su paz, la vida cambia con el desarrollo de nuevas tecnologías y las personas avanzan.
+Mientras mantiene sus sentimientos por su persona importante, Violet Evergarden intenta vivir en este mundo sin esa persona.
+</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="f7.png"/>
+<div class="info">
+<p><strong>Título:</strong> Encanto</p>
+<p><strong>Sinopsis:</strong> La casa mágica de la familia corre peligro, pero Maribel sabe que siempre hay una luz de esperanza</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="f8.png"/>
+<div class="info">
+<p><strong>Título:</strong> Dragon Ball Super (Super Hero)</p>
+<p><strong>Sinopsis:</strong> El Ejército del Listón Rojo ha vuelto con dos nuevos androides para enfrentar a Goku y a sus amigos.</p>
+</div>
+</div>
+</div>
+
+<button class="nav-arrow nav-right" 
+  style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, 1)">›</button>
+  </div>
+
+  <h3>Comedia y drama</h3>
+  <div class="carousel-container">
+<button class="nav-arrow nav-left" 
+  style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, -1)">‹</button>
+    <div class="carousel">
+      <!-- Repite hasta 8 películas, aquí van 6 de ejemplo -->
+     <div class="movie-card">
+<img src="c1.png"/>
+<div class="info">
+<p><strong>Título:</strong> Ahí te encargo</p>
+<p><strong>Sinopsis:</strong> Un joven matrimonio discute sobre tener hijos. Ella tiene una carrera exitosa y no está lista, pero él sí. Un día, él termina cuidando a un bebé que no es suyo, lo que desencadena enredos, descubrimientos y decisiones importantes para su relación. Comedia romántica mexicana.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="c2.png"/>
+<div class="info">
+<p><strong>Título:</strong> Estado eléctrico </p>
+<p><strong>Sinopsis:</strong> En un mundo retrofuturista de los años 90, Michelle, una adolescente huérfana, emprende un viaje por el Oeste americano junto a un robot y un contrabandista para encontrar a su hermano desaparecido.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="c3.png"/>
+<div class="info">
+<p><strong>Título:</strong> Ricky Stanicky</p>
+<p><strong>Sinopsis:</strong> Tres amigos inventan un personaje ficticio llamado Ricky Stanicky para culparlo de sus travesuras. Años después, cuando sus esposas quieren conocerlo, contratan a un actor para que lo interprete… pero las cosas se complican cuando él se toma el papel muy en serio.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="c4.png"/>
+<div class="info">
+<p><strong>Título:</strong> El astronauta</p>
+<p><strong>Sinopsis:</strong> En este drama de ciencia ficción, Sandler interpreta a Jakub Procházka, un astronauta en una misión solitaria al borde del sistema solar.  Mientras enfrenta problemas personales y profesionales, establece una conexión inesperada con una criatura alienígena.  La película, basada en la novela Spaceman of Bohemia, fue dirigida por Johan Renck.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="c5.png"/>
+<div class="info">
+<p><strong>Título:</strong> Señora Influencer</p>
+<p><strong>Sinopsis:</strong> Fátima, una mujer de cuarenta años, se convierte inesperadamente en la influencer más famosa de México. Mientras su fama crece, dos jóvenes influencers, Sofi y Cami, intentan aprovecharse de su popularidad fingiendo ser sus amigas. Sin embargo, la situación toma un giro oscuro cuando Fátima enfrenta las consecuencias de su repentina notoriedad en las redes sociales.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="c6.png"/>
+<div class="info">
+<p><strong>Título:</strong> Una pequeña confusión</p>
+<p><strong>Sinopsis:</strong>Dos parejas recurren a la inseminación artificial para tener hijos, pero un error en la clínica provoca que cada futura madre reciba el embrión equivocado, generando una serie de situaciones cómicas y emotivas. </p>
+</div>
+</div>
+<div class="movie-card">
+<img src="c7.png"/>
+<div class="info">
+<p><strong>Título:</strong> Las chicas de Niza</p>
+<p><strong>Sinopsis:</strong> Es una precuela de la famosa comedia francesa "La vérité si je mens!". Narra cómo se conocieron los protagonistas en su juventud en Niza durante los años 80 y cómo iniciaron su vida en el mundo de los negocios, las estafas y la amistad.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="c8.png"/>
+<div class="info">
+<p><strong>Título:</strong> Mi amiga Eva</p>
+<p><strong>Sinopsis:</strong> BUna comedia dirigida por Cesc Gay que narra la historia de Eva, una mujer de 50 años que, tras un viaje a Roma, decide empezar una nueva vida en busca del amor.  La película aborda la crisis de pareja en la madurez con una mirada afilada.  </p>
+</div>
+</div>
+</div>
+
+<button class="nav-arrow nav-right" 
+  style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, 1)">›</button>
+  </div>
+
+ <h3>Ciencia ficción y terror</h3>
+  <div class="carousel-container">
+<button class="nav-arrow nav-left" 
+  style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, -1)">‹</button>
+
+    <div class="carousel">
+      <!-- Repite hasta 8 películas, aquí van 6 de ejemplo -->
+      <div class="movie-card">
+<img src="t1.png"/>
+<div class="info">
+<p><strong>Título:</strong> Posesión infernal: El despertar</p>
+<p><strong>Sinopsis:</strong> Dos hermanas distanciadas se reencuentran en un edificio de Los Ángeles, pero su reunión se convierte en una pesadilla cuando una entidad demoníaca es liberada, obligándolas a luchar por sus vidas.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="t2.png"/>
+<div class="info">
+<p><strong>Título:</strong> Silence</p>
+<p><strong>Sinopsis:</strong> Bode enfrenta la muerte de su amigo Dapo y una serie de traiciones, mientras lucha por proteger a una niña en medio de un entorno hostil.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="t3.png"/>
+<div class="info">
+<p><strong>Título:</strong>  La Monja II</p>
+<p><strong>Sinopsis:</strong> En 1956, la hermana Irene enfrenta nuevamente a Valak, la monja demoníaca, tras una serie de muertes en Europa.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="t4.png"/>
+<div class="info">
+<p><strong>Título:</strong> Sonríe</p>
+<p><strong>Sinopsis:</strong> La Dra. Rose Cotter experimenta sucesos aterradores tras presenciar un incidente traumático con una paciente.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="t5.png"/>
+<div class="info">
+<p><strong>Título:</strong>  Drácula: La leyenda jamás contada</p>
+<p><strong>Sinopsis:</strong> Vlad Tepes hace un pacto oscuro para obtener poderes y proteger a su familia, convirtiéndose en el legendario Drácula.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="t6.png"/>
+<div class="info">
+<p><strong>Título:</strong>Cría siniestra</p>
+<p><strong>Sinopsis:</strong>  UTinja, una joven gimnasta, cuida un huevo misterioso que esconde una criatura perturbadora.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="t7.png"/>
+<div class="info">
+<p><strong>Título:</strong> Spectral</p>
+<p><strong>Sinopsis:</strong> Un equipo militar combate entidades invisibles que amenazan con destruir una ciudad en guerra.</p>
+</div>
+</div>
+
+    </div>
+<button class="nav-arrow nav-right" 
+  style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, 1)">›</button>
+  </div>
+
+ <h3>Romance y supenso </h3>
+  <div class="carousel-container">
+<button class="nav-arrow nav-left" 
+  style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, -1)">‹</button>    <div class="carousel">
+      <div class="movie-card">
+<img src="r1.png"/>
+<div class="info">
+<p><strong>Título:</strong> Die, My Love</p>
+<p><strong>Sinopsis:</strong> Grace, una madre en la campiña francesa, enfrenta una profunda depresión posparto que la lleva a una espiral de psicosis.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="r2.png"/>
+<div class="info">
+<p><strong>Título:</strong> Hamburgo</p>
+<p><strong>Sinopsis:</strong> Germán, conductor para una red de trata en la Costa del Sol, decide robar a la mafia para cambiar su vida, desatando consecuencias peligrosas. </p>
+</div>
+</div>
+<div class="movie-card">
+<img src="r3.png"/>
+<div class="info">
+<p><strong>Título:</strong> La idea de tenerte</p>
+<p><strong>Sinopsis:</strong> Solène, madre divorciada de 40 años, inicia un inesperado romance con Hayes, el joven cantante de una popular boy band, durante el festival Coachella. </p>
+</div>
+</div>
+<div class="movie-card">
+<img src="r4.png"/>
+<div class="info">
+<p><strong>Título:</strong> Revolver</p>
+<p><strong>Sinopsis:</strong> Tras siete años en prisión, Jake Green busca vengarse del mafioso que lo traicionó, utilizando una fórmula ganadora aprendida en la cárcel.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="r5.png"/>
+<div class="info">
+<p><strong>Título:</strong> Culpa tuya</p>
+<p><strong>Sinopsis:</strong> VNoah y Nick enfrentan nuevos desafíos en su relación cuando exnovias y secretos familiares amenazan con separarlos.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="r6.png"/>
+<div class="info">
+<p><strong>Título:</strong> La trampa</p>
+<p><strong>Sinopsis:</strong> Un asesino en serie asiste a un concierto con su hija, sin saber que el evento es una trampa organizada por la policía para capturarlo. </p>
+</div>
+</div>
+<div class="movie-card">
+<img src="r7.png"/>
+<div class="info">
+<p><strong>Título:</strong>  Los últimos románticos</p>
+<p><strong>Sinopsis:</strong> Irune, una mujer solitaria y hipocondríaca, ve su rutina alterada por un diagnóstico médico y un conflicto laboral en su fábrica de papel.</p>
+</div>
+</div>
+</div>
+
+<button class="nav-arrow nav-right" 
+  style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, 1)">›</button>
+  </div>
+
+ <h3>Acción y aventura</h3>
+  <div class="carousel-container">
+<button class="nav-arrow nav-left" 
+  style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, -1)">‹</button>
+    <div class="carousel">
+      <!-- Repite hasta 8 películas, aquí van 6 de ejemplo -->
+      <div class="movie-card">
+<img src="a1.png"/>
+<div class="info">
+<p><strong>Título:</strong>  Duna: Parte 2</p>
+<p><strong>Sinopsis:</strong> Paul Atreides une fuerzas con los Fremen para vengar a su familia y enfrentar su destino como el mesías de Arrakis.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="a2.png"/>
+<div class="info">
+<p><strong>Título:</strong> John Wick 4</p>
+<p><strong>Sinopsis:</strong> John Wick lucha contra la Alta Mesa en una guerra global, enfrentando asesinos de élite en su camino hacia la libertad.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="a3.png"/>
+<div class="info">
+<p><strong>Título:</strong> Operación Fortune: El gran engaño</p>
+<p><strong>Sinopsis:</strong> Un espía recluta a una estrella de cine para detener la venta de tecnología peligrosa a través de una misión secreta.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="a4.png"/>
+<div class="info">
+<p><strong>Título:</strong> Jungle Cruise</p>
+<p><strong>Sinopsis:</strong> Una científica y un capitán aventurero exploran el Amazonas en busca de un árbol con propiedades curativas legendarias.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="a5.png"/>
+<div class="info">
+<p><strong>Título:</strong> Doctor Strange en el Multiverso de la Locura</p>
+<p><strong>Sinopsis:</strong> El Dr. Strange viaja por realidades paralelas para detener una amenaza que pone en peligro todo el multiverso.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="a6.png"/>
+<div class="info">
+<p><strong>Título:</strong> Gunpowder Milkshake</p>
+<p><strong>Sinopsis:</strong>Una asesina debe proteger a una niña mientras se enfrenta a su propio pasado y a una organización criminal.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="a7.png"/>
+<div class="info">
+<p><strong>Título:</strong>El Hombre Gris</p>
+<p><strong>Sinopsis:</strong> BUn agente encubierto de la CIA es perseguido por un asesino psicópata tras descubrir secretos comprometedores.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="a8.png"/>
+<div class="info">
+<p><strong>Título:</strong> Misión Imposible: Sentencia Mortal – Parte 1</p>
+<p><strong>Sinopsis:</strong> BEthan Hunt y su equipo enfrentan una IA peligrosa que amenaza con alterar el orden mundial.</p>
+</div>
+</div>
+</div>
+
+<button class="nav-arrow nav-right" 
+  style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, 1)">›</button>
+  </div>
+
+</section>
+
+
+<section id="Proximamente">
+  <h2>Proximamente</h2>
+  <div class="carousel-container">
+<button class="nav-arrow nav-left" 
+  style="position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, -1)">‹</button>
+    <div class="carousel">
+<div class="movie-card">
+<img src="E1.png"/>
+<div class="info">
+<p><strong>Título:</strong> Cómo entrenar a tu dragón (Live Action)</p>
+<p><strong>Sinopsis:</strong> Un joven vikingo forja una inesperada amistad con un dragón, cambiando la relación entre humanos y estas criaturas para siempre.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="E2.png"/>
+<div class="info">
+<p><strong>Título:</strong> Wicked: For Good</p>
+<p><strong>Sinopsis:</strong> Secuela de Wicked, sigue a Elphaba y Glinda enfrentando las consecuencias de sus decisiones en el mágico mundo de Oz.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="E3.png"/>
+<div class="info">
+<p><strong>Título:</strong> Elio</p>
+<p><strong>Sinopsis:</strong> Un niño solitario es llevado por alienígenas para convertirse en embajador intergaláctico, descubriendo su verdadero potencial.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="E4.png"/>
+<div class="info">
+<p><strong>Título:</strong> Jurassic World: El Renacer</p>
+<p><strong>Sinopsis:</strong> Los dinosaurios se dispersan por el mundo tras un desastre, y los humanos luchan por sobrevivir en un nuevo ecosistema peligroso.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="E5.png"/>
+<div class="info">
+<p><strong>Título:</strong> M3GAN 2.0</p>
+<p><strong>Sinopsis:</strong> La muñeca androide M3GAN regresa con nuevas capacidades, pero su protección se vuelve más oscura y peligrosa.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="E6.png"/>
+<div class="info">
+<p><strong>Título:</strong> Supermar</p>
+<p><strong>Sinopsis:</strong> Un extraterrestre con poderes sobrehumanos lucha por proteger a la Tierra mientras enfrenta amenazas tanto alienígenas como humanas.
+
+</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="E7.png"/>
+<div class="info">
+<p><strong>Título:</strong> El Conjuro </p>
+<p><strong>Sinopsis:</strong> Una nueva investigación paranormal lleva a Ed y Lorraine Warren a enfrentarse a un oscuro misterio que pone en peligro a una familia.</p>
+</div>
+</div>
+</div>
+
+<button class="nav-arrow nav-right" 
+  style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+         background-color: rgba(0, 0, 0, 0.6); color: white; border: none;
+         font-size: 2rem; z-index: 10000; cursor: pointer; padding: 8px 12px; border-radius: 5px;"
+  onclick="slide(this, 1)">›</button>  </div>
+</section>
+
+
+<footer>
+  © 2025 CineBot | Proyecto escolar de películas - Todos los derechos reservados
+</footer>
+<script
+    src="https://unpkg.com/react-stackai@latest/dist/vanilla/vanilla-stackai.js"
+    data-project-url="https://www.stack-ai.com/embed/cd980238-96fc-41db-8dff-9f8ca9542f50/ed6e4ed2-753e-47ef-9735-0c739852c0dd/682414f68d7db10b1f06a814">
+  </script>
+
+<script>
+  function slide(button, direction) {
+    const container = button.closest('.carousel-container');
+    const carousel = container.querySelector('.carousel');
+    const scrollAmount = 240;
+    carousel.scrollLeft += direction * scrollAmount;
+  }
+</script>
+
+</script>
+
+
+</body>
+</html>
