@@ -2,52 +2,27 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>CineBot | Películas</title>
+  <title>Cineando</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="logito.png">
   <style>
-
     body {
-      margin: 0;
+      margin: 80px 0 0 0;
       font-family: 'Arial', sans-serif;
       background-color: #111;
       color: #fff;
     }
-header {
-  position: relative;
-  background: url('banner.png') no-repeat center center;
-  background-size: cover;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  color: #fff;
-  z-index: 1;
-}
-
-header::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.6));
-  z-index: 0;
-}
-
-header h1,
-header p {
-  z-index: 1;
-}
-
 
     nav {
       background: #fff;
       display: flex;
       justify-content: center;
       padding: 1rem;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 10;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
     }
 
     nav a {
@@ -62,24 +37,45 @@ header p {
     }
 
     header {
-      background: url('/mnt/data/b66e9101-cbac-4547-92c4-273346899f98.png') no-repeat center center;
+      position: relative;
+      background: url('banner.png') no-repeat center top;
       background-size: cover;
-      height: 200px;
+      height: 270px;
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       color: #fff;
+      z-index: 1;
     }
 
-    header h1 {
-      font-size: 2.5rem;
-      margin: 0;
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 0;
+    }
+
+    header img,
+    header p {
+      position: relative;
+      z-index: 1;
+    }
+
+    header img {
+      width: 500px;
+      max-width: 90%;
+      margin-bottom: 0.5rem;
     }
 
     header p {
       font-size: 1.1rem;
+      margin: 0;
     }
 
     section {
@@ -162,17 +158,16 @@ header p {
 </head>
 <body>
 
-<nav>
-  <a href="#recomendadas">Películas</a>
-  <a href="#estrenos">Estrenos</a>
-  <a href="#generos">Géneros</a>
-  <a href="#Proximamente">Proximamente</a>
-</nav>
+  <nav>
+    <a href="#recomendadas">Estrenos</a>
+    <a href="#estrenos">Novedades</a>
+    <a href="#generos">Géneros</a>
+    <a href="#Proximamente">Proximamente</a>
+  </nav>
 
-<header>
-  <h1>🎬 CineBot</h1>
-  <p>Tu asistente virtual para elegir la película perfecta</p>
-</header>
+  <header>
+    <img src="logo.png" alt="Cineando">
+  </header>
 
 <section id="recomendadas">
   <h2>Estrenos Recientes</h2>
@@ -220,17 +215,17 @@ header p {
 </div>
 </div>
 <div class="movie-card">
-<img src="foto6.png"/>
-<div class="info">
-<p><strong>Título:</strong>  Kenia OS: La OG</p>
-<p><strong>Sinopsis:</strong> Documental que muestra la evolución artística de Kenia OS, destacando su preparación y presentación en el Palacio de los Deportes de la Ciudad de México, reflejando su impacto en la música pop mexicana.</p>
-</div>
-</div>
-<div class="movie-card">
 <img src="foto7.png"/>
 <div class="info">
 <p><strong>Título:</strong> Thunderbolts (también conocida como Los Nuevos Vengadores)</p>
 <p><strong>Sinopsis:</strong> Un grupo de antihéroes marginados es reclutado por Valentina de Fontaine para una misión suicida que los obliga a enfrentar su pasado y redimirse como un nuevo equipo.</p>
+</div>
+</div>
+<div class="movie-card">
+<img src="foto6.png"/>
+<div class="info">
+<p><strong>Título:</strong>  Kenia OS: La OG</p>
+<p><strong>Sinopsis:</strong> Documental que muestra la evolución artística de Kenia OS, destacando su preparación y presentación en el Palacio de los Deportes de la Ciudad de México, reflejando su impacto en la música pop mexicana.</p>
 </div>
 </div>
 <div class="movie-card">
@@ -240,6 +235,7 @@ header p {
 <p><strong>Sinopsis:</strong> Grace Pudel, una niña solitaria en el Melbourne de los años 70, enfrenta la muerte de su padre y la separación de su hermano gemelo.</p>
 </div>
 </div>
+
 </div>
 
 <button class="nav-arrow nav-right" 
@@ -722,7 +718,7 @@ Mientras mantiene sus sentimientos por su persona importante, Violet Evergarden 
 </div>
 </div>
 <div class="movie-card">
-<img src="e4.png"/>
+<img src="E4.png"/>
 <div class="info">
 <p><strong>Título:</strong> Jurassic World: El Renacer</p>
 <p><strong>Sinopsis:</strong> Los dinosaurios se dispersan por el mundo tras un desastre, y los humanos luchan por sobrevivir en un nuevo ecosistema peligroso.</p>
@@ -745,7 +741,7 @@ Mientras mantiene sus sentimientos por su persona importante, Violet Evergarden 
 </div>
 </div>
 <div class="movie-card">
-<img src="e7.png"/>
+<img src="E7.png"/>
 <div class="info">
 <p><strong>Título:</strong> El Conjuro </p>
 <p><strong>Sinopsis:</strong> Una nueva investigación paranormal lleva a Ed y Lorraine Warren a enfrentarse a un oscuro misterio que pone en peligro a una familia.</p>
@@ -762,7 +758,6 @@ Mientras mantiene sus sentimientos por su persona importante, Violet Evergarden 
 
 
 <footer>
-  © 2025 CineBot | Proyecto escolar de películas - Todos los derechos reservados
 </footer>
 <script
     src="https://unpkg.com/react-stackai@latest/dist/vanilla/vanilla-stackai.js"
