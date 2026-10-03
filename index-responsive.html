@@ -1,0 +1,4506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revista Fan</title>
+  <link rel="icon" type="image/png" href="imagenes/LOGO 4.png" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    header {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 78%;
+      max-width: 980px;
+      z-index: 1000;
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.95);
+      border-radius: 50px;
+      padding: 18px 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 58px;
+      overflow: hidden;
+      isolation: isolate;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+      transition:
+        transform 0.35s ease,
+        opacity 0.35s ease,
+        background 0.45s ease,
+        border-color 0.45s ease,
+        box-shadow 0.45s ease,
+        backdrop-filter 0.45s ease;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,0.20), transparent 32%),
+        linear-gradient(115deg, rgba(255,255,255,0.13), rgba(255,255,255,0.02) 44%, rgba(0,174,239,0.08));
+      transition: opacity 0.45s ease;
+    }
+
+    header.header-glass {
+      background: rgba(8, 8, 8, 0.46);
+      border-color: rgba(255,255,255,0.28);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      backdrop-filter: blur(18px) saturate(150%);
+      box-shadow:
+        0 14px 38px rgba(0,0,0,0.34),
+        inset 0 1px 0 rgba(255,255,255,0.16),
+        inset 0 -1px 0 rgba(255,255,255,0.05);
+    }
+
+    header.header-glass::before {
+      opacity: 1;
+    }
+
+    header.header-hidden {
+      transform: translate(-50%, -130%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 34px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    nav a,
+    .logo {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      position: relative;
+      font-size: 14px;
+      padding-bottom: 7px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #00aeef;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 38px;
+    }
+
+    .menu-logo {
+      max-width: 64px;
+      max-height: 34px;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .hero-logo {
+      width: min(620px, 86vw);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    .btn {
+      background: #d4b434;
+      color: #000;
+      padding: 12px 22px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: 0.3s;
+      border: none;
+    }
+
+    .btn:hover {
+      background: #b9006d;
+      color: #fff;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 120px 8%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h2 {
+      font-size: clamp(36px, 6vw, 80px);
+      margin-bottom: 25px;
+      text-transform: uppercase;
+    }
+
+    .section-text {
+      max-width: 850px;
+      font-size: 20px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    /* HERO */
+    #inicio {
+      text-align: center;
+      background:
+        linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,.58)),
+        url("imagenes/banner.jpg") center center / cover no-repeat;
+    }
+
+    #inicio .hero-logo {
+      filter: drop-shadow(0 12px 30px rgba(0,0,0,0.45));
+    }
+
+    #inicio p {
+      max-width: 700px;
+      margin: 25px auto;
+      font-size: 22px;
+      line-height: 1.5;
+    }
+
+    /* NOSOTROS */
+    #nosotros {
+      min-height: 100vh;
+      padding: 110px 6%;
+      background: #017fb0;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .about-shell {
+      width: min(1420px, 100%);
+      margin: 0 auto;
+    }
+
+    .about-heading {
+      margin-bottom: 34px;
+    }
+
+    .about-kicker {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #d4b434;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .about-title {
+      max-width: 860px;
+      margin: 0;
+      font-size: clamp(42px, 5.7vw, 86px);
+      line-height: .97;
+      text-transform: none;
+      letter-spacing: -.045em;
+    }
+
+    .about-stage {
+      display: grid;
+      grid-template-columns: minmax(310px, .78fr) minmax(580px, 1.22fr);
+      gap: clamp(26px, 4vw, 60px);
+      align-items: stretch;
+      min-height: 640px;
+    }
+
+    .about-copy {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(30px, 4vw, 58px);
+      background: #000;
+      color: #fff;
+      border-radius: 0 34px 34px 0;
+      box-shadow: 0 26px 70px rgba(0,0,0,.22);
+      overflow: hidden;
+    }
+
+    .about-copy::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: linear-gradient(#d4b434 0 33%, #b9006d 33% 66%, #00aeef 66%);
+    }
+
+    .about-display-title {
+      margin: 0 0 24px;
+      font-size: clamp(42px, 4.8vw, 76px);
+      line-height: .95;
+      letter-spacing: -.04em;
+      font-weight: 800;
+      transition: opacity .24s ease, transform .24s ease;
+    }
+
+    .about-display-title em {
+      color: #00aeef;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .about-description {
+      max-width: 600px;
+      font-size: clamp(17px, 1.35vw, 21px);
+      line-height: 1.72;
+      transition: opacity .24s ease, transform .24s ease;
+    }
+
+    .about-description.is-changing,
+    .about-display-title.is-changing {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .about-options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 42px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.2);
+    }
+
+    .about-option {
+      position: relative;
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,.62);
+      padding: 11px 0 11px 28px;
+      text-align: left;
+      font: inherit;
+      font-size: clamp(18px, 1.6vw, 26px);
+      font-style: italic;
+      cursor: pointer;
+      transition: color .22s ease, transform .22s ease;
+    }
+
+    .about-option::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 14px;
+      height: 2px;
+      background: #00aeef;
+      transform: translateY(-50%) scaleX(0);
+      transform-origin: left;
+      transition: transform .22s ease, width .22s ease;
+    }
+
+    .about-option:hover,
+    .about-option:focus-visible,
+    .about-option.is-active {
+      color: #fff;
+      transform: translateX(7px);
+      outline: none;
+    }
+
+    .about-option:hover::before,
+    .about-option:focus-visible::before,
+    .about-option.is-active::before {
+      width: 20px;
+      transform: translateY(-50%) scaleX(1);
+    }
+
+    .about-option.is-active {
+      font-weight: 800;
+    }
+
+    .about-meta {
+      display: none;
+    }
+
+    .about-visual {
+      position: relative;
+      min-width: 0;
+      min-height: 640px;
+    }
+
+    .about-collage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: opacity .34s ease, transform .34s ease;
+    }
+
+    .about-collage.is-changing {
+      opacity: 0;
+      transform: translateX(12px);
+    }
+
+    .about-photo {
+      position: absolute;
+      overflow: hidden;
+      background: #000 center / cover no-repeat;
+      box-shadow: 0 22px 60px rgba(0,0,0,.25);
+      transition: transform .45s cubic-bezier(.2,.75,.2,1), filter .45s ease;
+    }
+
+    .about-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.19));
+    }
+
+    .about-photo:nth-child(1) {
+      left: 2%;
+      top: 3%;
+      width: 54%;
+      height: 48%;
+      border-radius: 30px 8px 30px 8px;
+      z-index: 2;
+    }
+
+    .about-photo:nth-child(2) {
+      right: 0;
+      top: 9%;
+      width: 48%;
+      height: 73%;
+      border-radius: 8px 30px 8px 30px;
+      z-index: 1;
+    }
+
+    .about-photo:nth-child(3) {
+      left: 13%;
+      bottom: 0;
+      width: 58%;
+      height: 48%;
+      border-radius: 8px 30px 8px 30px;
+      z-index: 3;
+      border: 10px solid #017fb0;
+    }
+
+    .about-photo:hover {
+      transform: translateY(-6px) scale(1.012);
+      filter: saturate(1.08);
+      z-index: 5;
+    }
+
+    .about-decor {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity .3s ease, transform .35s ease;
+    }
+
+    .about-decor.is-changing {
+      opacity: 0;
+      transform: translateY(8px) scale(.98);
+    }
+
+    .about-decor > .ray-star {
+      position: absolute;
+      display: block;
+      width: 150px;
+      height: 150px;
+      opacity: .95;
+      pointer-events: none;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,.16));
+      transition: transform .45s cubic-bezier(.2,.75,.2,1), opacity .3s ease;
+    }
+
+    .ray-star i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      height: 4px;
+      background: currentColor;
+      transform-origin: -12px center;
+    }
+
+    .ray-star i:nth-child(1) { transform: rotate(0deg) translateX(23px); }
+    .ray-star i:nth-child(2) { transform: rotate(45deg) translateX(23px); }
+    .ray-star i:nth-child(3) { transform: rotate(90deg) translateX(23px); }
+    .ray-star i:nth-child(4) { transform: rotate(135deg) translateX(23px); }
+    .ray-star i:nth-child(5) { transform: rotate(180deg) translateX(23px); }
+    .ray-star i:nth-child(6) { transform: rotate(225deg) translateX(23px); }
+    .ray-star i:nth-child(7) { transform: rotate(270deg) translateX(23px); }
+    .ray-star i:nth-child(8) { transform: rotate(315deg) translateX(23px); }
+
+    /* QUIÉNES SOMOS */
+    .about-decor.decor-waves .decor-one {
+      left: 2%;
+      top: 7%;
+      width: 138px;
+      height: 138px;
+      color: #d4b434;
+      transform: rotate(8deg);
+    }
+
+    .about-decor.decor-waves .decor-two {
+      right: 3%;
+      bottom: 8%;
+      width: 92px;
+      height: 92px;
+      color: #fff;
+      opacity: .68;
+      transform: rotate(18deg);
+    }
+
+    /* QUÉ HACEMOS */
+    .about-decor.decor-stripes .decor-one {
+      right: 2%;
+      top: 5%;
+      width: 154px;
+      height: 154px;
+      color: #d4b434;
+      transform: rotate(12deg);
+    }
+
+    .about-decor.decor-stripes .decor-two {
+      left: 5%;
+      bottom: 10%;
+      width: 84px;
+      height: 84px;
+      color: #00aeef;
+      opacity: .76;
+      transform: rotate(-10deg);
+    }
+
+    /* CÓMO LO VIVIMOS */
+    .about-decor.decor-circle .decor-one {
+      left: 3%;
+      bottom: 5%;
+      width: 148px;
+      height: 148px;
+      color: #d4b434;
+      transform: rotate(-8deg);
+    }
+
+    .about-decor.decor-circle .decor-two {
+      right: 4%;
+      top: 8%;
+      width: 76px;
+      height: 76px;
+      color: #b9006d;
+      opacity: .76;
+      transform: rotate(14deg);
+    }
+
+    /* CON LOS PROTAGONISTAS */
+    .about-decor.decor-cross .decor-one {
+      right: 4%;
+      bottom: 7%;
+      width: 142px;
+      height: 142px;
+      color: #d4b434;
+      transform: rotate(4deg);
+    }
+
+    .about-decor.decor-cross .decor-two {
+      left: 4%;
+      top: 6%;
+      width: 88px;
+      height: 88px;
+      color: #fff;
+      opacity: .7;
+      transform: rotate(-14deg);
+    }
+
+    .about-visual:hover .about-decor > .ray-star {
+      transform: rotate(14deg) scale(1.025);
+    }
+
+    @media (max-width: 680px) {
+      .about-decor > .ray-star {
+        width: 100px;
+        height: 100px;
+      }
+
+      .about-decor.decor-waves .decor-one,
+      .about-decor.decor-stripes .decor-one,
+      .about-decor.decor-circle .decor-one,
+      .about-decor.decor-cross .decor-one {
+        width: 108px;
+        height: 108px;
+      }
+
+      .about-decor.decor-waves .decor-two,
+      .about-decor.decor-stripes .decor-two,
+      .about-decor.decor-circle .decor-two,
+      .about-decor.decor-cross .decor-two {
+        width: 62px;
+        height: 62px;
+      }
+    }
+
+
+    @media (max-width: 1050px) {
+      #nosotros { padding: 130px 6% 90px; }
+      .about-stage { grid-template-columns: 1fr; min-height: auto; }
+      .about-copy { border-radius: 28px; }
+      .about-visual { min-height: 620px; }
+    }
+
+    @media (max-width: 680px) {
+      .about-title { font-size: clamp(38px, 13vw, 62px); }
+      .about-copy { padding: 32px 26px; }
+      .about-visual { min-height: 500px; }
+      .about-photo:nth-child(1) { width: 66%; height: 43%; }
+      .about-photo:nth-child(2) { width: 52%; height: 64%; }
+      .about-photo:nth-child(3) { left: 5%; width: 72%; height: 43%; border-width: 6px; }
+    }
+
+    /* COBERTURAS */
+    #coberturas {
+      padding: 118px 0 110px;
+      background: #050505;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .coverage-wrap {
+      position: relative;
+      width: min(1420px, 88%);
+      margin: 0 auto;
+      padding-top: 22px;
+    }
+
+    .coverage-wrap::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 170px;
+      height: 6px;
+      background: linear-gradient(90deg, #d4b434 0 34%, #b9006d 34% 67%, #00aeef 67% 100%);
+    }
+
+    .coverage-heading {
+      max-width: 860px;
+      margin-bottom: 48px;
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .coverage-heading h2 {
+      margin: 0 0 14px;
+      font-size: clamp(54px, 7vw, 94px);
+      line-height: .9;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+    }
+
+    .coverage-heading .section-text {
+      max-width: 760px;
+      color: rgba(255,255,255,.76);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .coverage-card {
+      position: relative;
+      cursor: pointer;
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #111;
+      box-shadow: 0 20px 50px rgba(0,0,0,.28);
+      transition:
+        transform .32s ease,
+        box-shadow .32s ease,
+        border-color .32s ease;
+    }
+
+    .coverage-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #d4b434;
+      z-index: 5;
+      transform: scaleX(.18);
+      transform-origin: left;
+      transition: transform .32s ease, background .32s ease;
+    }
+
+    .coverage-card.kilo::after {
+      background: #b9006d;
+    }
+
+    .coverage-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(255,255,255,.28);
+      box-shadow: 0 28px 70px rgba(0,0,0,.42);
+    }
+
+    .coverage-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .coverage-card-image {
+      position: relative;
+      height: 330px;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      isolation: isolate;
+      transition: transform .32s ease;
+    }
+
+    .coverage-card-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,.18), transparent 32%),
+        linear-gradient(115deg, rgba(255,255,255,.12), rgba(255,255,255,.02) 44%, rgba(0,174,239,.08)),
+        rgba(8,8,8,.30);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      backdrop-filter: blur(18px) saturate(150%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.14),
+        inset 0 -1px 0 rgba(255,255,255,.05);
+      transition: opacity .32s ease;
+    }
+
+    .coverage-card:hover .coverage-card-image::before {
+      opacity: 1;
+    }
+
+    .coverage-card:hover .coverage-card-image {
+      transform: scale(1.018);
+    }
+
+    .coverage-card-body {
+      position: relative;
+      flex: 1;
+      min-height: 250px;
+      padding: 28px 30px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .coverage-card.powerup .coverage-card-body {
+      background: #00aeef;
+      color: #fff;
+    }
+
+    .coverage-card.kilo .coverage-card-body {
+      background: #b9006d;
+      color: #fff;
+    }
+
+    .coverage-card-title {
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: .95;
+      letter-spacing: -.05em;
+      margin-bottom: 14px;
+      text-wrap: balance;
+    }
+
+    .coverage-card-desc {
+      font-size: 17px;
+      line-height: 1.65;
+      margin-bottom: 18px;
+      max-width: 580px;
+      opacity: .92;
+    }
+
+    .coverage-card-meta {
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+
+
+    .fan-editions-stage.focus-left .fan-edition-card:first-child,
+    .fan-editions-stage.focus-center .fan-edition-card:nth-child(2),
+    .fan-editions-stage.focus-right .fan-edition-card:last-child {
+      border-color: #000;
+      box-shadow: 14px 16px 0 rgba(0,0,0,.16), 0 30px 70px rgba(0,0,0,.24);
+    }
+
+    .fan-editions-stage.has-many {
+      min-height: auto;
+      justify-content: flex-start;
+      gap: 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-top: 22px;
+      padding-bottom: 10px;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+
+    .fan-editions-stage.has-many::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .fan-editions-stage.has-many::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,.24);
+      border-radius: 999px;
+    }
+
+    .fan-editions-stage.has-many .fan-volume-index {
+      display: none;
+    }
+
+    .fan-editions-stage.has-many .fan-edition-card {
+      flex: 0 0 320px;
+      scroll-snap-align: start;
+    }
+
+    .fan-editions-stage.has-many .fan-edition-card,
+    .fan-editions-stage.has-many .fan-edition-card:nth-of-type(2),
+    .fan-editions-stage.has-many.focus-left .fan-edition-card,
+    .fan-editions-stage.has-many.focus-center .fan-edition-card,
+    .fan-editions-stage.has-many.focus-right .fan-edition-card {
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+      box-shadow: 12px 14px 0 rgba(0,0,0,.13), 0 20px 52px rgba(0,0,0,.18) !important;
+    }
+
+    .fan-editions-stage.has-many .fan-edition-card:hover img,
+    .fan-editions-stage.has-many .fan-edition-card:focus-visible img {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 980px) {
+      .coverage-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .coverage-card-image {
+        height: 310px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      #coberturas {
+        padding: 92px 0;
+      }
+
+      .coverage-wrap {
+        width: 92%;
+      }
+
+      .coverage-heading {
+        padding-left: 0;
+        margin-bottom: 34px;
+      }
+
+      .coverage-card-image {
+        height: 250px;
+      }
+
+      .coverage-card-body {
+        min-height: auto;
+        padding: 22px 20px 24px;
+      }
+
+      .coverage-card-title {
+        font-size: clamp(30px, 10vw, 42px);
+      }
+    }
+
+
+    .coverage-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2200;
+      padding: 22px;
+      background: rgba(0,0,0,.72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .24s ease, visibility .24s ease;
+    }
+
+    .coverage-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .coverage-modal-dialog {
+      width: min(1080px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      color: #fff;
+      transform: translateY(18px);
+      opacity: 0;
+      transition: transform .32s cubic-bezier(.2,.72,.2,1), opacity .32s ease;
+      box-shadow: 0 28px 70px rgba(0,0,0,.34);
+      background:
+        linear-gradient(var(--coverage-bg), var(--coverage-bg)) padding-box,
+        linear-gradient(90deg, #00aeef 0%, #d4b434 34%, #b9006d 67%, #00aeef 100%) border-box;
+      background-size: 100% 100%, 220% 100%;
+      animation: coverageBorderFlow 8s linear infinite;
+    }
+
+    .coverage-modal.is-open .coverage-modal-dialog {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .coverage-modal-dialog.powerup {
+      --coverage-bg: #00aeef;
+    }
+
+    .coverage-modal-dialog.kilo {
+      --coverage-bg: #b9006d;
+    }
+
+    .coverage-close {
+      position: sticky;
+      top: 18px;
+      margin: 18px 18px 0 auto;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 50%;
+      background: transparent;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 40;
+    }
+
+    .coverage-article {
+      padding: 0 0 0;
+    }
+
+    .coverage-content-block {
+      margin: 0;
+      padding: 18px 7% 0;
+      background: transparent;
+      color: #fff;
+    }
+
+    .coverage-kicker {
+      margin-bottom: 18px;
+      color: #d4b434;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .coverage-title {
+      max-width: 860px;
+      margin-bottom: 20px;
+      font-size: clamp(42px, 6vw, 84px);
+      line-height: .94;
+      letter-spacing: -.055em;
+      text-wrap: balance;
+    }
+
+    .coverage-dek {
+      max-width: 860px;
+      margin-bottom: 20px;
+      color: rgba(255,255,255,.92);
+      font-size: clamp(19px, 2vw, 25px);
+      line-height: 1.55;
+    }
+
+    .coverage-meta {
+      margin-bottom: 42px;
+      color: rgba(255,255,255,.84);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .coverage-text {
+      max-width: 820px;
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.86;
+    }
+
+    .coverage-text p + p {
+      margin-top: 20px;
+    }
+
+    .coverage-gallery {
+      margin-top: 42px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .coverage-gallery figure {
+      margin: 0;
+      overflow: hidden;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+    }
+
+    .coverage-gallery img {
+      width: 100%;
+      height: 230px;
+      display: block;
+      object-fit: cover;
+      background: rgba(255,255,255,.12);
+    }
+
+    .coverage-gallery figcaption {
+      padding: 10px 0 0;
+      color: rgba(255,255,255,.82);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    
+    .coverage-divider {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      margin: 0 0 30px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          #b9006d 0 36px,
+          #d4b434 36px 72px,
+          #00aeef 72px 108px
+        );
+      background-size: 216px 100%;
+      animation: coverageStripeFlow 6s linear infinite;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset;
+    }
+
+    @keyframes coverageStripeFlow {
+      from { background-position: 0 0; }
+      to { background-position: 216px 0; }
+    }
+
+    @keyframes coverageBorderFlow {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 0 0, 220% 0; }
+    }
+
+
+    .coverage-content-block {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coverage-footer-divider {
+      width: 100%;
+      height: 2px;
+      margin: 42px 0 0;
+      background: rgba(255,255,255,.92);
+    }
+
+    .coverage-footer-extras {
+      display: block;
+      margin: 0;
+      padding: 28px 7% 34px;
+      color: #fff;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .coverage-modal-dialog.powerup .coverage-footer-extras {
+      background: #b9006d;
+    }
+
+    .coverage-modal-dialog.kilo .coverage-footer-extras {
+      background: #d4b434;
+      color: #111;
+    }
+
+    .coverage-social-inline {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .coverage-social-label {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .coverage-social-list {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .coverage-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: inherit;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      transition: opacity .18s ease;
+    }
+
+    .coverage-social-link:hover {
+      opacity: .72;
+    }
+
+    .coverage-social-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .coverage-author-inline {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .coverage-author-photo {
+      width: 110px;
+      aspect-ratio: 4 / 5;
+      background: rgba(255,255,255,.14) center / cover no-repeat;
+      border: 1px solid rgba(255,255,255,.34);
+    }
+
+    .coverage-modal-dialog.kilo .coverage-author-photo {
+      background-color: rgba(0,0,0,.08);
+      border-color: rgba(0,0,0,.18);
+    }
+
+    .coverage-author-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      max-width: 720px;
+    }
+
+    .coverage-author-name {
+      font-size: 26px;
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -.025em;
+    }
+
+    .coverage-author-role {
+      font-size: 13px;
+      line-height: 1.5;
+      opacity: .82;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .coverage-author-bio {
+      font-size: 15px;
+      line-height: 1.72;
+      opacity: .94;
+    }
+
+
+    .fan-editions-stage.focus-left .fan-edition-card:first-child,
+    .fan-editions-stage.focus-center .fan-edition-card:nth-child(2),
+    .fan-editions-stage.focus-right .fan-edition-card:last-child {
+      border-color: #000;
+      box-shadow: 14px 16px 0 rgba(0,0,0,.16), 0 30px 70px rgba(0,0,0,.24);
+    }
+
+    @media (max-width: 980px) {
+      .coverage-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .coverage-gallery {
+        grid-template-columns: 1fr;
+      }
+}
+
+    @media (max-width: 700px) {
+      #coberturas {
+        padding: 90px 0;
+      }
+
+      .coverage-wrap {
+        width: 92%;
+      }
+
+      .coverage-card-image {
+        height: 260px;
+      }
+
+      .coverage-card-body {
+        min-height: auto;
+        padding: 22px 20px 24px;
+      }
+
+      .coverage-card-title {
+        font-size: clamp(30px, 10vw, 42px);
+      }
+
+      .coverage-modal {
+        padding: 10px;
+      }
+
+      .coverage-article {
+        padding: 0;
+      }
+.coverage-title {
+        font-size: clamp(30px, 10vw, 44px);
+      }
+
+      .coverage-dek,
+      .coverage-text {
+        font-size: 16px;
+      }
+    }
+
+
+    /* EDICIONES FAN */
+    #ediciones-fan {
+      position: relative;
+      min-height: auto;
+      padding: 108px 0 120px;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,255,255,.09), transparent 26%),
+        radial-gradient(circle at 82% 78%, rgba(0,0,0,.05), transparent 30%),
+        #d4b434;
+      color: #000;
+      overflow: hidden;
+    }
+
+    #ediciones-fan::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .24;
+      background-image:
+        radial-gradient(circle, rgba(0,0,0,.14) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 82%, transparent 100%);
+    }
+
+    .fan-editions {
+      position: relative;
+      z-index: 1;
+      width: min(1420px, 88%);
+      margin: 0 auto;
+    }
+
+    .fan-editions-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 34px;
+    }
+
+    .fan-editions-title-wrap {
+      min-width: 0;
+    }
+
+    .fan-editions-title-wrap::before {
+      content: "";
+      display: block;
+      width: 126px;
+      height: 5px;
+      margin-bottom: 18px;
+      background: linear-gradient(90deg, #b9006d 0 50%, #00aeef 50% 100%);
+    }
+
+    .fan-editions-heading h3 {
+      margin: 0;
+      font-size: clamp(54px, 7.2vw, 112px);
+      line-height: .86;
+      letter-spacing: -.065em;
+      text-transform: uppercase;
+      max-width: 900px;
+    }
+
+    .fan-editions-meta {
+      align-self: center;
+      justify-self: end;
+      padding-bottom: 8px;
+      font-size: clamp(15px, 1.3vw, 18px);
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: .42;
+      white-space: nowrap;
+    }
+
+    .fan-editions-heading p,
+    .fan-editions-kicker {
+      display: none;
+    }
+
+    .fan-editions-stage {
+      position: relative;
+      min-height: 590px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: clamp(24px, 4vw, 54px);
+      overflow: visible;
+      padding-top: 56px;
+    }
+
+    .fan-editions-stage::before {
+      display: none;
+    }
+
+    .fan-volume-index {
+      position: absolute;
+      top: -6px;
+      z-index: 0;
+      width: clamp(220px, 18vw, 320px);
+      text-align: center;
+      font-size: clamp(92px, 12vw, 190px);
+      line-height: .8;
+      font-weight: 900;
+      letter-spacing: -.08em;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(0,0,0,.16);
+      text-stroke: 2px rgba(0,0,0,.16);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .fan-volume-index.index-1 { left: 4%; }
+    .fan-volume-index.index-2 { left: 50%; top: 26px; transform: translateX(-50%); }
+    .fan-volume-index.index-3 { right: 4%; }
+
+    .fan-edition-card {
+      position: relative;
+      z-index: 2;
+      flex: 0 1 360px;
+      max-width: 360px;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border: 3px solid #000;
+      border-radius: 18px;
+      background: #111;
+      cursor: pointer;
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      transition:
+        transform .68s cubic-bezier(.22,.72,.18,1),
+        opacity .52s ease,
+        filter .52s ease,
+        box-shadow .52s ease,
+        border-color .52s ease;
+      box-shadow: 12px 14px 0 rgba(0,0,0,.13), 0 20px 52px rgba(0,0,0,.18);
+      isolation: isolate;
+      will-change: transform;
+    }
+
+    .fan-edition-card:nth-of-type(2) {
+      transform: translateY(26px);
+    }
+
+    .fan-edition-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 46%, rgba(0,0,0,.78) 100%);
+    }
+
+    .fan-edition-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .68s cubic-bezier(.22,.72,.18,1), filter .52s ease;
+    }
+
+    .fan-edition-card[data-edition="septiembre"] {
+      background: linear-gradient(145deg, #171717, #070707);
+    }
+
+    .fan-edition-card[data-edition="septiembre"]::before {
+      content: "ALBERTO DE LA GARZA";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      padding: 34px;
+      color: rgba(255,255,255,.18);
+      font-size: clamp(22px, 2.5vw, 40px);
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-align: center;
+    }
+
+    .fan-edition-card[data-edition="septiembre"] img {
+      position: relative;
+      z-index: 2;
+    }
+
+    .fan-edition-card:focus-visible {
+      outline: 3px solid #000;
+      outline-offset: 5px;
+    }
+
+    .fan-edition-info {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+      padding: 20px 22px 22px;
+      color: #fff;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.84) 34%);
+    }
+
+    .fan-edition-month {
+      display: inline-block;
+      margin-bottom: 9px;
+      color: #d4b434;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .fan-edition-name {
+      margin: 0;
+      font-size: clamp(30px, 3vw, 46px);
+      line-height: .95;
+      letter-spacing: -.04em;
+    }
+
+    /* Enfoque calmado con tres volúmenes. */
+    .fan-editions-stage.focus-left .fan-edition-card:first-of-type {
+      transform: translateX(36px) scale(1.045);
+      box-shadow: 14px 16px 0 rgba(0,0,0,.16), 0 30px 70px rgba(0,0,0,.24);
+      z-index: 4;
+    }
+
+    .fan-editions-stage.focus-left .fan-edition-card:nth-of-type(2) {
+      transform: translate(10px, 26px) scale(.965);
+      opacity: .5;
+      filter: saturate(.76) brightness(.84);
+    }
+
+    .fan-editions-stage.focus-left .fan-edition-card:nth-of-type(3) {
+      transform: translateX(18px) scale(.95);
+      opacity: .36;
+      filter: saturate(.7) brightness(.78);
+    }
+
+    .fan-editions-stage.focus-right .fan-edition-card:nth-of-type(3) {
+      transform: translateX(-36px) scale(1.045);
+      box-shadow: 14px 16px 0 rgba(0,0,0,.16), 0 30px 70px rgba(0,0,0,.24);
+      z-index: 4;
+    }
+
+    .fan-editions-stage.focus-right .fan-edition-card:nth-of-type(2) {
+      transform: translate(-10px, 26px) scale(.965);
+      opacity: .5;
+      filter: saturate(.76) brightness(.84);
+    }
+
+    .fan-editions-stage.focus-right .fan-edition-card:first-of-type {
+      transform: translateX(-18px) scale(.95);
+      opacity: .36;
+      filter: saturate(.7) brightness(.78);
+    }
+
+    .fan-editions-stage.focus-center .fan-edition-card:nth-of-type(2) {
+      transform: translateY(0) scale(1.055);
+      box-shadow: 14px 16px 0 rgba(0,0,0,.16), 0 30px 70px rgba(0,0,0,.24);
+      z-index: 4;
+    }
+
+    .fan-editions-stage.focus-center .fan-edition-card:first-of-type {
+      transform: translateX(-20px) scale(.96);
+      opacity: .48;
+      filter: saturate(.74) brightness(.82);
+    }
+
+    .fan-editions-stage.focus-center .fan-edition-card:nth-of-type(3) {
+      transform: translateX(20px) scale(.96);
+      opacity: .48;
+      filter: saturate(.74) brightness(.82);
+    }
+
+    .fan-editions-stage.focus-left .fan-edition-card:first-of-type img,
+    .fan-editions-stage.focus-center .fan-edition-card:nth-of-type(2) img,
+    .fan-editions-stage.focus-right .fan-edition-card:nth-of-type(3) img {
+      transform: scale(1.025);
+    }
+
+    @media (max-width: 980px) {
+      .fan-editions-heading {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .fan-editions-meta {
+        justify-self: start;
+        padding-bottom: 0;
+      }
+
+      .fan-volume-index {
+        opacity: .7;
+      }
+    }
+
+    @media (max-width: 760px) {
+      #ediciones-fan { padding: 90px 0 96px; }
+      .fan-editions { width: 92%; margin-top: 0; }
+      .fan-editions-stage { min-height: auto; flex-direction: column; gap: 22px; overflow: visible; padding-top: 18px; }
+      .fan-volume-index { display: none; }
+      .fan-editions-stage::before { display: none; }
+      .fan-edition-card { width: min(100%, 360px); flex-basis: auto; }
+      .fan-edition-card:nth-child(2) { transform: none; }
+      .fan-editions-stage.focus-left .fan-edition-card,
+      .fan-editions-stage.focus-center .fan-edition-card,
+      .fan-editions-stage.focus-right .fan-edition-card { transform: none !important; opacity: 1 !important; filter: none !important; }
+    }
+
+    /* Ediciones Fan: carrusel editorial interactivo tipo coverflow. */
+    .fan-edition-reader {
+      position: fixed;
+      inset: 0;
+      z-index: 2600;
+      display: grid;
+      place-items: center;
+      padding: 26px;
+      background: rgba(0,0,0,.94);
+      -webkit-backdrop-filter: blur(18px) saturate(125%);
+      backdrop-filter: blur(18px) saturate(125%);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .28s ease, visibility .28s ease;
+    }
+
+    .fan-edition-reader.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .fan-edition-reader-shell {
+      position: relative;
+      width: min(1560px, 100%);
+      height: min(88vh, 900px);
+      display: grid;
+      grid-template-rows: auto minmax(0,1fr) auto auto;
+      gap: 10px;
+    }
+
+    .fan-gallery-topbar {
+      position: relative;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 0 88px 0 88px;
+    }
+
+    .fan-gallery-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 0;
+      text-align: center;
+      max-width: min(1000px, 100%);
+    }
+
+    .fan-gallery-heading strong {
+      color: #fff;
+      font-size: clamp(20px, 2.1vw, 32px);
+      letter-spacing: -.03em;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .fan-gallery-heading span,
+    .fan-edition-counter {
+      color: rgba(255,255,255,.62);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .fan-gallery-heading span {
+      max-width: min(980px, 100%);
+      line-height: 1.5;
+      text-wrap: balance;
+    }
+
+    .fan-edition-counter {
+      position: absolute;
+      right: 88px;
+      top: 50%;
+      transform: translateY(-50%);
+      white-space: nowrap;
+    }
+
+    .fan-edition-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.34);
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 40;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    .fan-edition-close:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .fan-coverflow-wrap {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 58px minmax(0,1fr) 58px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .fan-coverflow {
+      position: relative;
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      perspective: 1500px;
+      cursor: grab;
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .fan-coverflow.is-dragging { cursor: grabbing; }
+
+    .fan-coverflow-track {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+    }
+
+    .fan-coverflow-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: clamp(175px, 18.5vw, 300px);
+      aspect-ratio: 3 / 4.9;
+      border: 0;
+      padding: 0;
+      background: #111;
+      overflow: hidden;
+      cursor: pointer;
+      transform-origin: center;
+      box-shadow: 0 22px 70px rgba(0,0,0,.46);
+      transition:
+        transform .42s cubic-bezier(.2,.72,.18,1),
+        opacity .32s ease,
+        filter .32s ease,
+        box-shadow .32s ease;
+      will-change: transform, opacity;
+    }
+
+    .fan-coverflow.is-dragging .fan-coverflow-card {
+      transition: transform .08s linear, opacity .08s linear, filter .08s linear;
+    }
+
+    .fan-coverflow-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      pointer-events: none;
+      transition: transform .42s cubic-bezier(.2,.72,.18,1), filter .3s ease;
+    }
+
+    .fan-coverflow-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.28));
+      opacity: .35;
+      transition: opacity .3s ease;
+    }
+
+    .fan-coverflow-card.is-active {
+      z-index: 20;
+      box-shadow: 0 28px 86px rgba(0,0,0,.56);
+    }
+
+    .fan-coverflow-card.is-active::after { opacity: 0; }
+    .fan-coverflow-card.is-active:hover img { transform: scale(1.025); }
+
+    .fan-edition-arrow {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, transform .2s ease, opacity .2s ease;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    .fan-edition-arrow:hover:not(:disabled) {
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .fan-edition-arrow:disabled { opacity: .16; cursor: default; }
+
+    .fan-coverflow-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      margin: 16px auto 0;
+    }
+
+    .fan-coverflow-credit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 22px;
+      margin-top: 14px;
+      color: rgba(255,255,255,.72);
+      font-size: 11px;
+      letter-spacing: .04em;
+      text-align: center;
+    }
+
+    .fan-coverflow-credit-label {
+      color: rgba(255,255,255,.46);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .fan-coverflow-credit-name {
+      font-weight: 600;
+    }
+
+    .fan-coverflow-dot {
+      width: 8px;
+      height: 8px;
+      border: 0;
+      border-radius: 50%;
+      padding: 0;
+      background: rgba(255,255,255,.24);
+      cursor: pointer;
+      transition: width .22s ease, border-radius .22s ease, background .22s ease;
+    }
+
+    .fan-coverflow-dot.is-active {
+      width: 30px;
+      border-radius: 999px;
+      background: #fff;
+    }
+
+    .fan-coverflow-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,.42);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
+
+    .fan-coverflow.is-dragging .fan-coverflow-hint { opacity: 0; }
+
+    @media (max-width: 760px) {
+      #ediciones-fan { padding: 85px 0 95px; }
+      .fan-editions { width: 92%; margin-top: 0; }
+      .fan-editions-stage { min-height: auto; flex-direction: column; gap: 22px; overflow: visible; }
+      .fan-edition-card { width: min(100%, 360px); flex-basis: auto; }
+      .fan-editions-stage.focus-left .fan-edition-card,
+      .fan-editions-stage.focus-center .fan-edition-card,
+      .fan-editions-stage.focus-right .fan-edition-card { transform: none !important; opacity: 1 !important; filter: none !important; }
+      .fan-edition-reader { padding: 16px 8px; }
+      .fan-edition-reader-shell { height: 86vh; gap: 6px; }
+      .fan-gallery-topbar { padding-right: 52px; }
+      .fan-gallery-topbar { min-height: 86px; padding: 0 44px; }
+      .fan-gallery-heading { align-items: center; gap: 4px; }
+      .fan-gallery-heading strong { white-space: normal; }
+      .fan-edition-counter { right: 44px; top: auto; bottom: -2px; transform: none; }
+      .fan-coverflow-wrap { grid-template-columns: 40px minmax(0,1fr) 40px; gap: 2px; }
+      .fan-edition-arrow { width: 38px; height: 38px; font-size: 21px; }
+      .fan-coverflow-card {
+        width: min(52vw, 220px);
+        aspect-ratio: 3 / 4.85;
+      }
+      .fan-coverflow-hint { display: none; }
+      .fan-coverflow-credit {
+        flex-direction: column;
+        gap: 4px;
+        margin-top: 8px;
+        min-height: auto;
+      }
+    }
+
+    /* COLABORACIONES */
+    #colaboraciones {
+      min-height: auto;
+      padding: 110px 0 0;
+      background: #b9006d;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .collab-header {
+      width: min(1420px, 88%);
+      margin: 0 auto 44px;
+    }
+
+    .collab-header h2 {
+      margin-bottom: 18px;
+    }
+
+    .collab-header .section-text {
+      max-width: 940px;
+    }
+
+    .creator-block {
+      width: min(1420px, 100%);
+      margin: 0 auto;
+    }
+
+    .creator-block-heading {
+      width: 88%;
+      margin: 0 auto 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+    }
+
+    .creator-block-heading h3 {
+      font-size: clamp(28px, 3.2vw, 50px);
+      line-height: 1;
+    }
+
+    .creator-block-heading p {
+      max-width: 590px;
+      color: rgba(255,255,255,.78);
+      font-size: 15px;
+      line-height: 1.6;
+      text-align: right;
+    }
+
+    .creator-carousel-shell {
+      position: relative;
+      width: 100%;
+      padding: 10px 0 34px;
+    }
+.creator-carousel {
+      display: flex;
+      gap: 22px;
+      overflow-x: auto;
+      padding: 8px 6% 26px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      overscroll-behavior-inline: contain;
+      cursor: grab;
+    }
+
+    .creator-carousel:active {
+      cursor: grabbing;
+    }
+
+    .creator-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .creator-card {
+      position: relative;
+      flex: 0 0 clamp(210px, 18vw, 280px);
+      aspect-ratio: 9 / 16;
+      perspective: 1300px;
+      scroll-snap-align: start;
+      border-radius: 24px;
+      outline: none;
+    }
+
+    .creator-card-inner {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      transition: transform .52s cubic-bezier(.2,.72,.2,1);
+      border-radius: inherit;
+      box-shadow: 0 24px 55px rgba(0,0,0,.25);
+    }
+
+    .creator-card:hover .creator-card-inner,
+    .creator-card:focus-visible .creator-card-inner,
+    .creator-card.is-flipped .creator-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .creator-card-face {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: inherit;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background: #000;
+    }
+
+    .creator-card-front img,
+    .creator-card-back video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+.creator-card-info {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+      z-index: 2;
+    }
+
+    .creator-card-info span {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 6px 9px;
+      background: #d4b434;
+      color: #000;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .creator-card-info h4 {
+      font-size: clamp(21px, 1.8vw, 29px);
+      line-height: 1.02;
+      text-wrap: balance;
+    }
+
+    .creator-play-hint {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 3;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 50%;
+      background: rgba(0,0,0,.34);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      font-size: 15px;
+    }
+
+    .creator-card-back {
+      transform: rotateY(180deg);
+    }
+
+    .creator-card-back::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.14);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .creator-card-back .video-label {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      z-index: 2;
+      padding: 7px 10px;
+      background: rgba(0,0,0,.62);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    .creator-audio-btn {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      z-index: 4;
+      border: 1px solid rgba(255,255,255,.65);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(0,0,0,.66);
+      color: #fff;
+      font: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      cursor: pointer;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      transition: background .22s ease, color .22s ease, transform .22s ease;
+    }
+
+    .creator-audio-btn:hover,
+    .creator-audio-btn.is-active {
+      background: #fff;
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    .creator-controls {
+      position: absolute;
+      inset: 50% 2.2% auto;
+      z-index: 8;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+
+    .creator-arrow {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 50%;
+      background: rgba(0,0,0,.44);
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      pointer-events: auto;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      transition: background .25s ease, color .25s ease, transform .25s ease;
+    }
+
+    .creator-arrow:hover {
+      background: #fff;
+      color: #b9006d;
+      transform: scale(1.06);
+    }
+.brands-strip {
+      position: relative;
+      min-height: 260px;
+      margin-top: 72px;
+      display: grid;
+      grid-template-columns: minmax(280px, .78fr) minmax(0, 1.42fr);
+      background: #000;
+      overflow: hidden;
+    }
+
+    .brands-copy {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 58px 8%;
+      background:
+        linear-gradient(90deg, #000 0 72%, rgba(0,0,0,.92) 82%, rgba(0,0,0,0) 100%);
+    }
+
+    .brands-copy h3 {
+      max-width: 520px;
+      font-size: clamp(31px, 3.7vw, 61px);
+      line-height: .96;
+      letter-spacing: -.035em;
+    }
+
+    .brands-copy p {
+      max-width: 460px;
+      margin-top: 18px;
+      color: rgba(255,255,255,.68);
+      line-height: 1.55;
+    }
+
+    .brands-marquee {
+      position: relative;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    }
+
+    .brands-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      gap: 72px;
+      animation: brandScroll 16s linear infinite;
+      will-change: transform;
+    }
+
+    .brand-logo {
+      flex: 0 0 auto;
+      width: 210px;
+      height: 105px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+
+    .brand-logo img {
+      display: block;
+      max-width: 100%;
+      max-height: 72px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: .92;
+    }
+
+    @keyframes brandScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(-50% - 36px)); }
+    }
+
+    @media (max-width: 900px) {
+      #colaboraciones {
+        padding-top: 95px;
+      }
+
+      .creator-block-heading {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .creator-block-heading p {
+        text-align: left;
+      }
+
+      .creator-card {
+        flex-basis: min(70vw, 255px);
+      }
+
+      .creator-controls {
+        inset-inline: 3%;
+      }
+
+      .creator-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 21px;
+      }
+
+      .brands-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .brands-copy {
+        min-height: 220px;
+        background: linear-gradient(180deg, #000 0 78%, rgba(0,0,0,0) 100%);
+      }
+
+      .brands-marquee {
+        min-height: 170px;
+      }
+
+      .brand-logo {
+        width: 165px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .creator-card-inner,
+      .brands-track {
+        transition: none;
+        animation: none;
+      }
+    }
+
+    /* NOTICIAS */
+    #noticias {
+      position: relative;
+      min-height: auto;
+      padding: 118px 0 126px;
+      background: #fff;
+      color: #000;
+      overflow: hidden;
+    }
+
+    .news-shell {
+      width: min(1420px, 88%);
+      margin: 0 auto;
+    }
+
+    .news-heading {
+      position: relative;
+      max-width: 940px;
+      padding-top: 24px;
+      margin-bottom: 48px;
+    }
+
+    .news-heading::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 170px;
+      height: 6px;
+      background: linear-gradient(90deg, #00aeef 0 34%, #d4b434 34% 67%, #b9006d 67% 100%);
+    }
+
+    .news-heading h2 {
+      margin: 0 0 14px;
+      font-size: clamp(54px, 7vw, 94px);
+      line-height: .9;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+    }
+
+    #noticias .section-text {
+      max-width: 780px;
+      color: rgba(0,0,0,.68);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .news-instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+
+    .news-instagram-card {
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #000;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 10px 12px 0 rgba(0,0,0,.10);
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .news-instagram-card::before {
+      content: "";
+      display: block;
+      height: 5px;
+      background: #00aeef;
+    }
+
+    .news-instagram-card:nth-child(3n + 2)::before {
+      background: #b9006d;
+    }
+
+    .news-instagram-card:nth-child(3n)::before {
+      background: #d4b434;
+    }
+
+    .news-instagram-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 12px 16px 0 rgba(0,0,0,.14);
+    }
+
+    .news-instagram-frame {
+      width: 100%;
+      height: 610px;
+      display: block;
+      border: 0;
+      background: #fafafa;
+    }
+
+    @media (max-width: 1120px) {
+      .news-instagram-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      #noticias {
+        padding: 92px 0 96px;
+      }
+
+      .news-shell {
+        width: 92%;
+      }
+
+      .news-heading {
+        margin-bottom: 34px;
+      }
+
+      .news-instagram-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .news-instagram-frame {
+        height: 640px;
+      }
+    }
+
+    /* FOOTER */
+    .fan-footer {
+      position: relative;
+      overflow: hidden;
+      padding: 86px 7% 34px;
+      background: #111;
+      color: #fff;
+      isolation: isolate;
+    }
+
+    .fan-footer::before,
+    .fan-footer::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .12;
+      border: 1px solid rgba(255,255,255,.18);
+      transform: rotate(-28deg);
+    }
+
+    .fan-footer::before {
+      width: 620px;
+      height: 250px;
+      left: 15%;
+      top: 90px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .fan-footer::after {
+      width: 520px;
+      height: 240px;
+      right: 8%;
+      bottom: -70px;
+      background: rgba(255,255,255,.05);
+    }
+
+    .fan-footer-shell {
+      width: min(1420px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .7fr) minmax(280px, .7fr);
+      gap: clamp(42px, 6vw, 90px);
+      align-items: start;
+    }
+
+    .fan-footer-brand {
+      max-width: 620px;
+    }
+
+    .fan-footer-logo {
+      width: min(330px, 72vw);
+      height: auto;
+      display: block;
+      object-fit: contain;
+      margin-bottom: 28px;
+    }
+
+    .fan-footer-copy {
+      max-width: 560px;
+      color: rgba(255,255,255,.76);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .fan-footer-contact {
+      margin-top: 34px;
+      width: min(100%, 470px);
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0 28px;
+      border: 1px solid rgba(255,255,255,.72);
+      background: transparent;
+      color: #fff;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      cursor: default;
+    }
+
+    .fan-footer-contact span:last-child {
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .fan-footer-column h4 {
+      margin: 0 0 20px;
+      color: rgba(255,255,255,.52);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .fan-footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .fan-footer-links a {
+      width: fit-content;
+      color: #fff;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 800;
+      transition: color .2s ease, transform .2s ease;
+    }
+
+    .fan-footer-links a:hover {
+      color: #d4b434;
+      transform: translateX(4px);
+    }
+
+    .fan-footer-socials {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .fan-footer-social {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #d4b434;
+      color: #111;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .fan-footer-social:nth-child(2) { background: #b9006d; color: #fff; }
+    .fan-footer-social:nth-child(3) { background: #00aeef; color: #fff; }
+
+    .fan-footer-social:hover {
+      transform: translateY(-4px) scale(1.04);
+      background: #fff;
+      color: #000;
+    }
+
+    .fan-footer-social svg {
+      width: 21px;
+      height: 21px;
+      fill: currentColor;
+    }
+
+    .fan-footer-bottom {
+      width: min(1420px, 100%);
+      margin: 58px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.14);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: rgba(255,255,255,.52);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .fan-footer-bottom strong {
+      color: rgba(255,255,255,.76);
+    }
+
+    @media (max-width: 960px) {
+      .fan-footer-shell {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .fan-footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .fan-footer {
+        padding: 72px 7% 28px;
+      }
+
+      .fan-footer-shell {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .fan-footer-brand {
+        grid-column: auto;
+      }
+
+      .fan-footer-contact {
+        min-height: 60px;
+        padding: 0 20px;
+      }
+
+      .fan-footer-bottom {
+        margin-top: 44px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 900px) {
+      header {
+        width: 90%;
+        border-radius: 25px;
+        flex-direction: column;
+        gap: 15px;
+        padding: 18px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .logo {
+        width: 62px;
+        height: 34px;
+      }
+
+      .menu-logo {
+        max-width: 58px;
+        max-height: 30px;
+      }
+
+      .nosotros-layout,
+      .cards,
+      footer {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        border-left: none;
+        border-top: 3px solid #d4b434;
+        padding-left: 0;
+        padding-top: 30px;
+      }
+
+      section {
+        padding: 160px 6% 80px;
+      }
+    }
+
+
+    /* =========================================================
+       AJUSTES RESPONSIVE MÓVIL
+       Solo afectan pantallas pequeñas. El diseño desktop queda intacto.
+       ========================================================= */
+    @media (max-width: 700px) {
+      html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      /* Menú compacto para celular */
+      header {
+        top: 10px;
+        width: calc(100% - 20px);
+        max-width: none;
+        min-height: 62px;
+        padding: 8px 10px;
+        border-radius: 24px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        align-items: center;
+        gap: 6px;
+      }
+
+      header nav {
+        width: 100%;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+      }
+
+      header nav a {
+        padding: 2px 0;
+        font-size: clamp(8px, 2.5vw, 10px);
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+      header nav a::after {
+        display: none;
+      }
+
+      header .logo {
+        width: 50px;
+        height: 38px;
+      }
+
+      header .menu-logo {
+        max-width: 48px;
+        max-height: 30px;
+      }
+
+      /* Espaciado general */
+      section {
+        min-height: auto;
+        padding: 96px 5% 68px;
+      }
+
+      h2 {
+        font-size: clamp(34px, 12vw, 54px);
+        line-height: .95;
+        overflow-wrap: anywhere;
+      }
+
+      .section-text {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .btn {
+        padding: 11px 18px;
+        font-size: 14px;
+      }
+
+      /* Hero */
+      #inicio {
+        min-height: 100svh;
+        padding: 108px 7% 64px;
+        background-position: center center;
+      }
+
+      #inicio .hero-logo {
+        width: min(88vw, 430px);
+      }
+
+      #inicio p {
+        margin: 20px auto;
+        font-size: 17px;
+        line-height: 1.45;
+      }
+
+      /* Nosotros */
+      #nosotros {
+        padding: 92px 5% 70px;
+      }
+
+      .about-stage {
+        gap: 24px;
+      }
+
+      .about-copy {
+        padding: 28px 22px;
+        border-radius: 22px;
+      }
+
+      .about-display-title {
+        margin-bottom: 18px;
+        font-size: clamp(38px, 12vw, 56px);
+      }
+
+      .about-description {
+        font-size: 16px;
+        line-height: 1.62;
+      }
+
+      .about-options {
+        margin-top: 26px;
+        padding-top: 18px;
+      }
+
+      .about-option {
+        padding: 9px 0 9px 22px;
+        font-size: 17px;
+      }
+
+      .about-visual {
+        min-height: 390px;
+      }
+
+      .about-photo:nth-child(1) {
+        left: 0;
+        top: 2%;
+        width: 68%;
+        height: 42%;
+      }
+
+      .about-photo:nth-child(2) {
+        right: 0;
+        top: 12%;
+        width: 54%;
+        height: 63%;
+      }
+
+      .about-photo:nth-child(3) {
+        left: 4%;
+        bottom: 0;
+        width: 74%;
+        height: 43%;
+        border-width: 5px;
+      }
+
+      .about-decor > .ray-star {
+        transform: scale(.78);
+      }
+
+      /* Coberturas */
+      #coberturas {
+        padding: 82px 0 78px;
+      }
+
+      .coverage-wrap {
+        width: 90%;
+      }
+
+      .coverage-heading h2 {
+        font-size: clamp(42px, 14vw, 62px);
+      }
+
+      .coverage-heading .section-text {
+        font-size: 16px;
+      }
+
+      .coverage-card-image {
+        height: clamp(210px, 65vw, 270px);
+      }
+
+      .coverage-card-body {
+        padding: 20px 18px 22px;
+      }
+
+      .coverage-card-title {
+        font-size: clamp(30px, 10vw, 40px);
+      }
+
+      .coverage-card-desc {
+        font-size: 15px;
+        line-height: 1.55;
+      }
+
+      .coverage-modal {
+        padding: 6px;
+        align-items: stretch;
+      }
+
+      .coverage-modal-dialog {
+        max-height: calc(100svh - 12px);
+        border-radius: 14px;
+      }
+
+      .coverage-close {
+        top: 10px;
+        margin: 10px 10px 0 auto;
+        width: 40px;
+        height: 40px;
+      }
+
+      .coverage-content-block {
+        padding: 14px 6% 0;
+      }
+
+      .coverage-title {
+        font-size: clamp(30px, 10.5vw, 43px);
+      }
+
+      .coverage-dek,
+      .coverage-text {
+        font-size: 15px;
+      }
+
+      .coverage-text {
+        line-height: 1.72;
+      }
+
+      .coverage-gallery img {
+        height: auto;
+        aspect-ratio: 4 / 3;
+      }
+
+      .coverage-footer-extras {
+        padding: 24px 6% 28px;
+      }
+
+      .coverage-social-inline {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .coverage-author-inline {
+        grid-template-columns: 78px minmax(0, 1fr);
+        gap: 14px;
+      }
+
+      .coverage-author-photo {
+        width: 78px;
+      }
+
+      .coverage-author-name {
+        font-size: 21px;
+      }
+
+      .coverage-author-bio {
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      /* Ediciones */
+      #ediciones-fan {
+        padding: 82px 0 86px;
+      }
+
+      .fan-editions {
+        width: 90%;
+      }
+
+      .fan-editions-heading {
+        margin-bottom: 24px;
+      }
+
+      .fan-editions-heading h3 {
+        font-size: clamp(42px, 14vw, 64px);
+        line-height: .9;
+      }
+
+      .fan-editions-meta {
+        font-size: 13px;
+      }
+
+      .fan-editions-stage {
+        align-items: center;
+        padding-top: 8px;
+      }
+
+      .fan-edition-card,
+      .fan-editions-stage.has-many .fan-edition-card {
+        width: min(86vw, 330px);
+        max-width: 330px;
+        flex: 0 0 auto;
+      }
+
+      .fan-edition-info {
+        padding: 18px;
+      }
+
+      .fan-edition-name {
+        font-size: 32px;
+      }
+
+      /* Lector de edición */
+      .fan-edition-reader {
+        padding: 8px;
+      }
+
+      .fan-edition-reader-shell {
+        width: 100%;
+        height: calc(100svh - 16px);
+        grid-template-rows: auto minmax(0, 1fr) auto auto;
+      }
+
+      .fan-gallery-topbar {
+        min-height: 72px;
+        padding: 0 46px 8px 8px;
+        justify-content: flex-start;
+      }
+
+      .fan-gallery-heading {
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .fan-gallery-heading strong {
+        font-size: 19px;
+        white-space: normal;
+      }
+
+      .fan-gallery-heading span {
+        font-size: 8px;
+        letter-spacing: .08em;
+        text-align: left;
+      }
+
+      .fan-edition-counter {
+        left: 8px;
+        right: auto;
+        bottom: -1px;
+        font-size: 9px;
+      }
+
+      .fan-edition-close {
+        width: 40px;
+        height: 40px;
+      }
+
+      .fan-coverflow-wrap {
+        grid-template-columns: 34px minmax(0, 1fr) 34px;
+        gap: 0;
+      }
+
+      .fan-edition-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 19px;
+      }
+
+      .fan-coverflow-card {
+        width: min(58vw, 205px);
+      }
+
+      /* Colaboraciones */
+      #colaboraciones {
+        padding-top: 82px;
+      }
+
+      .collab-header,
+      .creator-block-heading {
+        width: 90%;
+      }
+
+      .collab-header {
+        margin-bottom: 30px;
+      }
+
+      .creator-carousel {
+        gap: 14px;
+        padding: 6px 5% 22px;
+      }
+
+      .creator-card {
+        flex-basis: min(76vw, 260px);
+        border-radius: 18px;
+      }
+
+      .creator-controls {
+        display: none;
+      }
+
+      .creator-audio-btn {
+        right: 10px;
+        bottom: 10px;
+        padding: 8px 10px;
+        font-size: 10px;
+      }
+
+      .brands-strip {
+        margin-top: 44px;
+      }
+
+      .brands-copy {
+        min-height: 190px;
+        padding: 42px 7%;
+      }
+
+      .brands-copy h3 {
+        font-size: clamp(30px, 10vw, 44px);
+      }
+
+      .brands-copy p {
+        font-size: 15px;
+      }
+
+      .brands-marquee {
+        min-height: 140px;
+      }
+
+      .brands-track {
+        gap: 38px;
+      }
+
+      .brand-logo {
+        width: 140px;
+        height: 82px;
+        padding: 12px;
+      }
+
+      /* Noticias */
+      #noticias {
+        padding: 82px 0 86px;
+      }
+
+      .news-shell {
+        width: 90%;
+      }
+
+      .news-heading h2 {
+        font-size: clamp(42px, 14vw, 62px);
+      }
+
+      #noticias .section-text {
+        font-size: 16px;
+      }
+
+      .news-instagram-card {
+        border-radius: 14px;
+        box-shadow: 6px 8px 0 rgba(0,0,0,.10);
+      }
+
+      .news-instagram-frame {
+        height: min(590px, 155vw);
+      }
+
+      /* Footer */
+      .fan-footer {
+        padding: 62px 6% 26px;
+      }
+
+      .fan-footer-logo {
+        width: min(270px, 78vw);
+        margin-bottom: 20px;
+      }
+
+      .fan-footer-copy {
+        font-size: 15px;
+        line-height: 1.65;
+      }
+
+      .fan-footer-contact {
+        width: 100%;
+        min-height: 56px;
+        margin-top: 26px;
+        padding: 0 16px;
+        font-size: 12px;
+      }
+
+      .fan-footer-contact span:first-child {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .fan-footer-column h4 {
+        margin-bottom: 14px;
+      }
+
+      .fan-footer-links a {
+        font-size: 16px;
+      }
+
+      .fan-footer-bottom {
+        margin-top: 36px;
+        padding-top: 20px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      header {
+        width: calc(100% - 12px);
+        padding-inline: 7px;
+      }
+
+      header nav a {
+        font-size: 8px;
+      }
+
+      header .logo {
+        width: 44px;
+      }
+
+      header .menu-logo {
+        max-width: 42px;
+      }
+
+      #inicio {
+        padding-inline: 5%;
+      }
+
+      .about-copy {
+        padding: 24px 18px;
+      }
+
+      .about-option {
+        font-size: 16px;
+      }
+
+      .coverage-author-inline {
+        grid-template-columns: 1fr;
+      }
+
+      .coverage-author-photo {
+        width: 74px;
+      }
+
+      .fan-coverflow-card {
+        width: min(62vw, 190px);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header id="mainHeader">
+    <nav>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#coberturas">Coberturas</a>
+    </nav>
+
+    <a href="#inicio" class="logo" aria-label="Revista Fan inicio">
+      <img src="imagenes/LOGO 3.png" alt="Revista Fan" class="menu-logo">
+    </a>
+
+    <nav>
+      <a href="#noticias">Noticias</a>
+      <a href="#colaboraciones">Colaboraciones</a>
+    </nav>
+  </header>
+
+  <section id="inicio">
+    <img src="imagenes/LOGO 1.png" alt="Revista Fan" class="hero-logo">
+    <p>Medio digital de entretenimiento, cultura pop y tendencias juveniles.</p>
+    <a href="#coberturas" class="btn">Ver coberturas</a>
+  </section>
+
+  <section id="nosotros">
+    <div class="about-shell">
+      <div class="about-heading">
+      </div>
+
+      <div class="about-stage">
+        <div class="about-copy">
+          <div>
+            <div class="about-display-title" id="aboutDisplayTitle">Quiénes <em>somos</em></div>
+            <p class="about-description" id="aboutDescription">Somos un medio digital enfocado en cultura pop, influencers y tendencias juveniles. Creamos contenido auténtico, creativo y relevante que conecta con nuevas generaciones.</p>
+          </div>
+
+          <div class="about-options" role="tablist" aria-label="Conoce Revista Fan">
+            <button class="about-option is-active" type="button" role="tab" aria-selected="true"
+              data-title="Quiénes <em>somos</em>"
+              data-description="Somos un medio digital enfocado en cultura pop, influencers y tendencias juveniles. Creamos contenido auténtico, creativo y relevante que conecta con nuevas generaciones."
+              data-decor="decor-waves"
+              data-image-one="imagenes/nosotros-1.jpeg" data-image-two="imagenes/nosotros-2.jpeg" data-image-three="imagenes/nosotros-3.jpeg">Quiénes somos</button>
+
+            <button class="about-option" type="button" role="tab" aria-selected="false"
+              data-title="Qué <em>hacemos</em>"
+              data-description="Cubrimos conciertos, premieres, ruedas de prensa y eventos especiales. También creamos entrevistas, preguntas rápidas y contenido exclusivo junto a artistas, influencers y creadores."
+              data-decor="decor-stripes"
+              data-image-one="imagenes/nosotros-4.jpeg" data-image-two="imagenes/nosotros-5.jpeg" data-image-three="imagenes/nosotros-6.jpeg">Qué hacemos</button>
+
+            <button class="about-option" type="button" role="tab" aria-selected="false"
+              data-title="Cómo lo <em>vivimos</em>"
+              data-description="No solo asistimos a los eventos: buscamos vivir cada experiencia desde dentro para contarla de una forma cercana, visual y auténtica para nuestra comunidad."
+              data-decor="decor-circle"
+              data-image-one="imagenes/nosotros-7.jpeg" data-image-two="imagenes/nosotros-8.jpeg" data-image-three="imagenes/nosotros-9.jpeg">Cómo lo vivimos</button>
+
+            <button class="about-option" type="button" role="tab" aria-selected="false"
+              data-title="Con los <em>protagonistas</em>"
+              data-description="Conversamos directamente con talentos y figuras del entretenimiento para descubrir su lado más espontáneo mediante entrevistas, dinámicas y formatos creados para redes sociales."
+              data-decor="decor-cross"
+              data-image-one="imagenes/nosotros-10.jpeg" data-image-two="imagenes/nosotros-11.jpeg" data-image-three="imagenes/nosotros-12.jpeg">Con los protagonistas</button>
+          </div>
+        </div>
+
+        <div class="about-visual" id="aboutVisual" aria-live="polite">
+          <div class="about-decor decor-waves" id="aboutDecor" aria-hidden="true">
+            <span class="decor-one ray-star">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </span>
+            <span class="decor-two ray-star">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </span>
+          </div>
+          <div class="about-collage" id="aboutCollage">
+            <div class="about-photo" id="aboutPhotoOne" style="background-image:linear-gradient(135deg,rgba(0,0,0,.04),rgba(0,0,0,.22)),url('imagenes/nosotros-1.jpeg')"></div>
+            <div class="about-photo" id="aboutPhotoTwo" style="background-image:linear-gradient(135deg,rgba(0,0,0,.04),rgba(0,0,0,.22)),url('imagenes/nosotros-2.jpeg')"></div>
+            <div class="about-photo" id="aboutPhotoThree" style="background-image:linear-gradient(135deg,rgba(0,0,0,.04),rgba(0,0,0,.22)),url('imagenes/nosotros-3.jpeg')"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+          <section id="coberturas">
+    <div class="coverage-wrap">
+      <div class="coverage-heading">
+        <h2>Coberturas</h2>
+        <p class="section-text">Eventos, lanzamientos y campañas contados de forma visual, directa y con una vibra más editorial.</p>
+      </div>
+
+      <div class="coverage-grid">
+        <article class="coverage-card powerup" data-coverage-open="powerup" role="button" tabindex="0" aria-label="Abrir cobertura Polinesios Power Up">
+          <div class="coverage-card-image" style="background-image:url('imagenes/cobertura-powerup.jpg')"></div>
+          <div class="coverage-card-body">
+            <div>
+              <h3 class="coverage-card-title">Polinesios Power Up</h3>
+              <p class="coverage-card-desc">El videojuego oficial en Roblox celebra 15 años de trayectoria y expande su universo digital.</p>
+              <div class="coverage-card-meta">Julio 16, 2026 • Revista Fan</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="coverage-card kilo" data-coverage-open="kilo" role="button" tabindex="0" aria-label="Abrir cobertura Un Kilo de Ayuda">
+          <div class="coverage-card-image" style="background-image:url('imagenes/cobertura-kilo.jpg')"></div>
+          <div class="coverage-card-body">
+            <div>
+              <h3 class="coverage-card-title">Un Kilo de Ayuda</h3>
+              <p class="coverage-card-desc">Los Polinesios se suman como embajadores de campaña y llevan el mensaje también a salas de cine.</p>
+              <div class="coverage-card-meta">2026 • Revista Fan</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="coverage-modal" id="coverageModal" aria-hidden="true">
+      <div class="coverage-modal-dialog" id="coverageDialog" role="dialog" aria-modal="true" aria-labelledby="coverageTitle">
+        <button class="coverage-close" type="button" id="coverageClose" aria-label="Cerrar cobertura">×</button>
+
+        <article class="coverage-article">
+<div class="coverage-content-block">
+<div class="coverage-kicker" id="coverageKicker"></div>
+            <h3 class="coverage-title" id="coverageTitle"></h3>
+            <p class="coverage-dek" id="coverageDek"></p>
+            <div class="coverage-meta" id="coverageMeta"></div>
+            <div class="coverage-divider" aria-hidden="true"></div>
+
+            <div class="coverage-text" id="coverageText"></div>
+
+            <div class="coverage-gallery" id="coverageGallery"></div>
+          </div>
+
+          <div class="coverage-footer-divider" aria-hidden="true"></div>
+
+          <div class="coverage-footer-extras">
+              <div class="coverage-social-inline">
+                <div class="coverage-social-label">Síguenos en redes sociales:</div>
+
+                <div class="coverage-social-list">
+                  <a class="coverage-social-link" href="#" aria-label="Instagram de Revista Fan">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.95 1.35a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 6.85A5.15 5.15 0 1 1 6.85 12 5.15 5.15 0 0 1 12 6.85Zm0 1.8A3.35 3.35 0 1 0 15.35 12 3.35 3.35 0 0 0 12 8.65Z"/></svg>
+                    Instagram
+                  </a>
+
+                  <a class="coverage-social-link" href="#" aria-label="TikTok de Revista Fan">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.6 2h2.69a5.22 5.22 0 0 0 4.11 4.12v2.72a7.82 7.82 0 0 1-4.1-1.16v7.53a6.37 6.37 0 1 1-6.38-6.36c.3 0 .6.02.89.06v2.76a3.63 3.63 0 1 0 2.79 3.54V2Z"/></svg>
+                    TikTok
+                  </a>
+                </div>
+              </div>
+
+              <div class="coverage-author-inline">
+                <div class="coverage-author-photo" id="coverageAuthorPhoto" aria-label="Foto de Max Leyva"></div>
+
+                <div class="coverage-author-meta">
+                  <div class="coverage-author-name" id="coverageAuthorName">Max Leyva</div>
+                  <div class="coverage-author-role" id="coverageAuthorRole">Editor y creador de Revista Fan</div>
+                  <div class="coverage-author-bio" id="coverageAuthorBio">Editor y creador de Revista Fan. Sigue de cerca la cultura pop, los lanzamientos digitales y las historias que conectan con nuevas generaciones desde un enfoque visual, cercano y entretenido.</div>
+                </div>
+              </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+<section id="ediciones-fan">
+    <div class="fan-editions" id="edicionesFan">
+      <div class="fan-editions-heading">
+        <div class="fan-editions-title-wrap">
+          <h3>Ediciones Fan</h3>
+        </div>
+        <span class="fan-editions-meta" id="fanEditionsMeta">2026</span>
+      </div>
+
+      <div class="fan-editions-stage" id="fanEditionsStage">
+        <span class="fan-volume-index index-1" aria-hidden="true">01</span>
+        <span class="fan-volume-index index-2" aria-hidden="true">02</span>
+        <span class="fan-volume-index index-3" aria-hidden="true">03</span>
+        <article class="fan-edition-card" data-edition="julio" tabindex="0" role="button" aria-label="Abrir Volumen 1">
+          <img src="imagenes/edicion-julio-1.jpg" alt="Portada de Volumen 1" loading="lazy">
+          <div class="fan-edition-info">
+            <span class="fan-edition-month">Julio 2026</span>
+            <h4 class="fan-edition-name">Volumen 1</h4>
+          </div>
+        </article>
+
+        <article class="fan-edition-card" data-edition="agosto" tabindex="0" role="button" aria-label="Abrir Volumen 2">
+          <img src="imagenes/edicion-agosto-1.jpg" alt="Portada de Volumen 2" loading="lazy">
+          <div class="fan-edition-info">
+            <span class="fan-edition-month">Agosto 2026</span>
+            <h4 class="fan-edition-name">Volumen 2</h4>
+          </div>
+        </article>
+
+        <article class="fan-edition-card" data-edition="septiembre" tabindex="0" role="button" aria-label="Abrir Volumen 3">
+          <img src="imagenes/edicion-septiembre-1.jpg" alt="Portada de Volumen 3" loading="lazy">
+          <div class="fan-edition-info">
+            <span class="fan-edition-month">Septiembre 2026</span>
+            <h4 class="fan-edition-name">Volumen 3</h4>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="fan-edition-reader" id="fanEditionReader" aria-hidden="true">
+      <div class="fan-edition-reader-shell" role="dialog" aria-modal="true" aria-labelledby="fanEditionReaderTitle">
+        <button class="fan-edition-close" id="fanEditionClose" type="button" aria-label="Cerrar edición">×</button>
+
+        <div class="fan-gallery-topbar">
+          <div class="fan-gallery-heading">
+            <strong id="fanEditionReaderTitle">Ediciones Fan</strong>
+            <span id="fanEditionReaderSubtitle">Bex Benedex · Novaly · Estebanwoo · Abril Cuentos · Dany Steria · Andres Gueda</span>
+          </div>
+          <span class="fan-edition-counter" id="fanEditionCounter">1 / 6</span>
+        </div>
+
+        <div class="fan-coverflow-wrap">
+          <button class="fan-edition-arrow" id="fanEditionPrev" type="button" aria-label="Imagen anterior">‹</button>
+          <div class="fan-coverflow" id="fanCoverflow" aria-label="Galería interactiva de la edición">
+            <div class="fan-coverflow-track" id="fanCoverflowTrack"></div>
+            <div class="fan-coverflow-hint">Arrastra para recorrer las fotos</div>
+          </div>
+          <button class="fan-edition-arrow" id="fanEditionNext" type="button" aria-label="Imagen siguiente">›</button>
+        </div>
+
+        <div class="fan-coverflow-footer" id="fanEditionThumbs" aria-label="Fotografías de la edición"></div>
+        <div class="fan-coverflow-credit" id="fanEditionCredit">
+          <span class="fan-coverflow-credit-label">Fotografía por</span>
+          <span class="fan-coverflow-credit-name" id="fanEditionCreditName">Crédito pendiente</span>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+<!-- TODO TU ARCHIVO ES IGUAL, SOLO ESTA PARTE CAMBIA -->
+
+<section id="colaboraciones">
+    <div class="collab-header">
+      <h2>Colaboraciones</h2>
+      <p class="section-text">Creamos contenido junto a creadores, talentos y marcas mediante entrevistas dinámicas, campañas y formatos pensados para redes sociales.</p>
+    </div>
+
+    <div class="creator-block">
+      <div class="creator-block-heading">
+      </div>
+
+      <div class="creator-carousel-shell">
+        <div class="creator-carousel" id="creatorCarousel" aria-label="Colaboraciones con creadores">
+        <article class="creator-card" tabindex="0" aria-label="Los Polinesios">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-1.jpg" alt="Los Polinesios" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-1.jpg">
+                <source src="videos/colaboracion-1.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Los Escabeche">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-2.jpg" alt="Los Escabeche" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-2.jpg">
+                <source src="videos/colaboracion-2.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Jess Escabeche">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-3.jpg" alt="Jess Escabeche" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-3.jpg">
+                <source src="videos/colaboracion-3.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Squad Escabeche">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-4.jpg" alt="Squad Escabeche" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-4.jpg">
+                <source src="videos/colaboracion-4.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Campaña InDrive">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-5.jpg" alt="Campaña InDrive" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-5.jpg">
+                <source src="videos/colaboracion-5.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Mónica Abascal">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-6.jpg" alt="Mónica Abascal" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-6.jpg">
+                <source src="videos/colaboracion-6.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Liza Báez">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-7.jpg" alt="Liza Báez" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-7.jpg">
+                <source src="videos/colaboracion-7.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Esteban Woo">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-8.jpg" alt="Esteban Woo" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-8.jpg">
+                <source src="videos/colaboracion-8.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Abril Cuentos">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-9.jpg" alt="Abril Cuentos" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-9.jpg">
+                <source src="videos/colaboracion-9.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Dani Esteria">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-10.jpg" alt="Dani Esteria" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-10.jpg">
+                <source src="videos/colaboracion-10.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Novaly">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-11.jpg" alt="Novaly" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-11.jpg">
+                <source src="videos/colaboracion-11.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Bex Benedex">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-12.jpg" alt="Bex Benedex" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-12.jpg">
+                <source src="videos/colaboracion-12.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        <article class="creator-card" tabindex="0" aria-label="Gerardo Magenta">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-13.jpg" alt="Gerardo Magenta" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-13.jpg">
+                <source src="videos/colaboracion-13.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+                <article class="creator-card" tabindex="0" aria-label="Gerardo Magenta">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-15.jpg" alt="Gerardo Magenta" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-13.jpg">
+                <source src="videos/colaboracion-15.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+                <article class="creator-card" tabindex="0" aria-label="Gerardo Magenta">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-16.jpg" alt="Gerardo Magenta" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-13.jpg">
+                <source src="videos/colaboracion-16.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+                <article class="creator-card" tabindex="0" aria-label="Gerardo Magenta">
+          <div class="creator-card-inner">
+            <div class="creator-card-face creator-card-front">
+              <img src="imagenes/colaboracion-14.jpg" alt="Gerardo Magenta" loading="lazy">
+            </div>
+            <div class="creator-card-face creator-card-back">
+              <video loop playsinline preload="metadata" poster="imagenes/colaboracion-13.jpg">
+                <source src="videos/colaboracion-14.mp4" type="video/mp4">
+              </video>
+              <button class="creator-audio-btn" type="button" aria-label="Activar audio">🔊 Activar audio</button>
+            </div>
+          </div>
+        </article>
+        </div>
+
+        
+
+        <div class="creator-controls">
+          <button class="creator-arrow" id="creatorPrev" type="button" aria-label="Ver colaboraciones anteriores">←</button>
+          <button class="creator-arrow" id="creatorNext" type="button" aria-label="Ver más colaboraciones">→</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="brands-strip">
+      <div class="brands-copy">
+        <h3>Marcas con las que hemos trabajado</h3>
+        <p>Campañas, publicaciones y contenido desarrollado junto a marcas que han confiado en Revista Fan.</p>
+      </div>
+
+      <div class="brands-marquee" aria-label="Marcas colaboradoras">
+        <div class="brands-track">
+          <div class="brand-logo"><img src="imagenes/marca-indrive.png" alt="InDrive"></div>
+          <div class="brand-logo"><img src="imagenes/marca-bombavista.png" alt="Bombavista"></div>
+          <div class="brand-logo"><img src="imagenes/marca-jbl.png" alt="JBL"></div>
+          <div class="brand-logo"><img src="imagenes/marca-indrive.png" alt="" aria-hidden="true"></div>
+          <div class="brand-logo"><img src="imagenes/marca-bombavista.png" alt="" aria-hidden="true"></div>
+          <div class="brand-logo"><img src="imagenes/marca-jbl.png" alt="" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="noticias">
+    <div class="news-shell">
+      <div class="news-heading">
+        <h2>Noticias</h2>
+        <p class="section-text">Lo más reciente de Revista Fan, directamente desde Instagram.</p>
+      </div>
+
+      <div class="news-instagram-grid">
+        <article class="news-instagram-card">
+          <iframe
+            class="news-instagram-frame"
+            src="https://www.instagram.com/p/DdU5QYkDp3_/embed/captioned/"
+            title="Publicación de Instagram 1 de Revista Fan"
+            loading="lazy"
+            allowtransparency="true"
+            scrolling="no"
+            allow="encrypted-media; picture-in-picture"
+          ></iframe>
+        </article>
+        <article class="news-instagram-card">
+          <iframe
+            class="news-instagram-frame"
+            src="https://www.instagram.com/p/DdKK2q7viXL/embed/captioned/"
+            title="Publicación de Instagram 3 de Revista Fan"
+            loading="lazy"
+            allowtransparency="true"
+            scrolling="no"
+            allow="encrypted-media; picture-in-picture"
+          ></iframe>
+        </article>
+        <article class="news-instagram-card">
+          <iframe
+            class="news-instagram-frame"
+            src="https://www.instagram.com/p/DdCzlIuuRxO/embed/captioned/"
+            title="Publicación de Instagram 4 de Revista Fan"
+            loading="lazy"
+            allowtransparency="true"
+            scrolling="no"
+            allow="encrypted-media; picture-in-picture"
+          ></iframe>
+        </article>
+        <article class="news-instagram-card">
+          <iframe
+            class="news-instagram-frame"
+            src="https://www.instagram.com/p/DdCkZCzBxf_Wn/embed/captioned/"
+            title="Publicación de Instagram 5 de Revista Fan"
+            loading="lazy"
+            allowtransparency="true"
+            scrolling="no"
+            allow="encrypted-media; picture-in-picture"
+          ></iframe>
+        </article>
+        <article class="news-instagram-card">
+          <iframe
+            class="news-instagram-frame"
+            src="https://www.instagram.com/p/Dc9RyLqPnVg/embed/captioned/"
+            title="Publicación de Instagram 6 de Revista Fan"
+            loading="lazy"
+            allowtransparency="true"
+            scrolling="no"
+            allow="encrypted-media; picture-in-picture"
+          ></iframe>
+        </article>
+        <article class="news-instagram-card">
+          <iframe
+            class="news-instagram-frame"
+            src="https://www.instagram.com/p/Dcv-5byOfX3/embed/captioned/"
+            title="Publicación de Instagram 7 de Revista Fan"
+            loading="lazy"
+            allowtransparency="true"
+            scrolling="no"
+            allow="encrypted-media; picture-in-picture"
+          ></iframe>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="fan-footer" id="contacto">
+    <div class="fan-footer-shell">
+      <div class="fan-footer-brand">
+        <img class="fan-footer-logo" src="imagenes/LOGO 1.png" alt="Revista Fan">
+        <p class="fan-footer-copy">Medio digital de entretenimiento, cultura pop, creadores y tendencias juveniles. Contamos historias, cubrimos momentos y creamos contenido con una mirada visual y cercana.</p>
+        <button class="fan-footer-contact" type="button" aria-disabled="true">
+          <span>Ponte en contacto</span>
+          <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+
+      <div class="fan-footer-column">
+        <h4>Secciones</h4>
+        <nav class="fan-footer-links" aria-label="Secciones del sitio">
+          <a href="#nosotros">Nosotros</a>
+          <a href="#coberturas">Coberturas</a>
+          <a href="#ediciones-fan">Ediciones Fan</a>
+          <a href="#noticias">Noticias</a>
+          <a href="#colaboraciones">Colaboraciones</a>
+        </nav>
+      </div>
+
+      <div class="fan-footer-column">
+        <h4>Redes</h4>
+        <div class="fan-footer-socials" aria-label="Redes sociales">
+          <a class="fan-footer-social" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5Zm8.88 1.5a1.37 1.37 0 1 1 0 2.74 1.37 1.37 0 0 1 0-2.74ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
+          </a>
+          <a class="fan-footer-social" href="#" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.6 2h3.1c.23 1.85 1.3 3.4 3.3 4.15v3.12c-1.24-.04-2.42-.36-3.46-.93v6.16c0 4.18-2.96 7.5-7.16 7.5A7.37 7.37 0 0 1 3 14.66c0-4.16 3.5-7.5 7.82-7.25v3.2a4.2 4.2 0 0 0-4.58 4.1 4.16 4.16 0 0 0 4.17 4.14c2.37 0 4.19-1.82 4.19-4.5V2Z"/></svg>
+          </a>
+          <a class="fan-footer-social" href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.72 22v-8.2h2.76l.41-3.2h-3.17V8.56c0-.93.26-1.56 1.59-1.56H17V4.14A22.7 22.7 0 0 0 14.54 4c-2.43 0-4.1 1.49-4.1 4.22v2.36H7.7v3.2h2.74V22h3.28Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fan-footer-bottom">
+      <span><strong>Revista Fan</strong> © 2026</span>
+      <span>Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('mainHeader');
+    let lastScrollY = window.scrollY;
+
+    function updateHeaderState() {
+      const currentScrollY = window.scrollY;
+
+      header.classList.toggle('header-glass', currentScrollY > 12);
+
+      if (currentScrollY > lastScrollY && currentScrollY > 120) {
+        header.classList.add('header-hidden');
+      } else {
+        header.classList.remove('header-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    }
+
+    window.addEventListener('scroll', updateHeaderState, { passive: true });
+    updateHeaderState();
+
+    const aboutOptions = document.querySelectorAll('.about-option');
+    const aboutDescription = document.getElementById('aboutDescription');
+    const aboutDisplayTitle = document.getElementById('aboutDisplayTitle');
+    const aboutCollage = document.getElementById('aboutCollage');
+    const aboutDecor = document.getElementById('aboutDecor');
+    const aboutPhotos = [
+      document.getElementById('aboutPhotoOne'),
+      document.getElementById('aboutPhotoTwo'),
+      document.getElementById('aboutPhotoThree')
+    ];
+
+    let activeAboutOption = document.querySelector('.about-option.is-active');
+    let aboutChangeTimer;
+
+    function setAboutPanel(option) {
+      if (!option || option === activeAboutOption) return;
+
+      clearTimeout(aboutChangeTimer);
+
+      aboutOptions.forEach(item => {
+        const isActive = item === option;
+        item.classList.toggle('is-active', isActive);
+        item.setAttribute('aria-selected', String(isActive));
+      });
+
+      aboutDescription.classList.add('is-changing');
+      aboutDisplayTitle.classList.add('is-changing');
+      aboutCollage.classList.add('is-changing');
+      aboutDecor.classList.add('is-changing');
+
+      aboutChangeTimer = setTimeout(() => {
+        aboutDescription.textContent = option.dataset.description;
+        aboutDisplayTitle.innerHTML = option.dataset.title;
+        aboutDecor.className = `about-decor ${option.dataset.decor || 'decor-waves'} is-changing`;
+
+        const images = [
+          option.dataset.imageOne,
+          option.dataset.imageTwo,
+          option.dataset.imageThree
+        ];
+
+        aboutPhotos.forEach((photo, index) => {
+          photo.style.backgroundImage =
+            `linear-gradient(135deg, rgba(0,0,0,.04), rgba(0,0,0,.24)), url("${images[index]}")`;
+        });
+
+        aboutDescription.classList.remove('is-changing');
+        aboutDisplayTitle.classList.remove('is-changing');
+        aboutCollage.classList.remove('is-changing');
+        requestAnimationFrame(() => aboutDecor.classList.remove('is-changing'));
+        activeAboutOption = option;
+      }, 230);
+    }
+
+    aboutOptions.forEach(option => {
+      option.addEventListener('mouseenter', () => setAboutPanel(option));
+      option.addEventListener('focus', () => setAboutPanel(option));
+      option.addEventListener('click', () => setAboutPanel(option));
+    });
+  
+    const creatorCarousel = document.getElementById('creatorCarousel');
+    const creatorCards = document.querySelectorAll('.creator-card');
+    const creatorPrev = document.getElementById('creatorPrev');
+    const creatorNext = document.getElementById('creatorNext');
+
+    function getCreatorVideo(card) {
+      return card?.querySelector('video') || null;
+    }
+
+    function getCreatorAudioButton(card) {
+      return card?.querySelector('.creator-audio-btn') || null;
+    }
+
+    function stopCreatorVideo(card, reset = true) {
+      const video = getCreatorVideo(card);
+      const audioButton = getCreatorAudioButton(card);
+      if (!video) return;
+
+      video.pause();
+      video.muted = true;
+      video.setAttribute('muted', '');
+
+      if (audioButton) {
+        audioButton.classList.remove('is-active');
+        audioButton.textContent = '🔊 Activar audio';
+        audioButton.setAttribute('aria-label', 'Activar audio');
+      }
+
+      if (reset) {
+        try { video.currentTime = 0; } catch (error) {}
+      }
+    }
+
+    function playCreatorPreview(card) {
+      const video = getCreatorVideo(card);
+      if (!video) return;
+
+      video.muted = true;
+      video.setAttribute('muted', '');
+      video.volume = 1;
+
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    }
+
+    async function enableCreatorAudio(card) {
+      const video = getCreatorVideo(card);
+      const audioButton = getCreatorAudioButton(card);
+      if (!video || !audioButton) return;
+
+      try {
+        video.removeAttribute('muted');
+        video.defaultMuted = false;
+        video.muted = false;
+        video.volume = 1;
+
+        if (video.paused) {
+          await video.play();
+        }
+
+        // Reapply after play begins; some browsers restore the previous muted state.
+        video.removeAttribute('muted');
+        video.defaultMuted = false;
+        video.muted = false;
+        video.volume = 1;
+
+        audioButton.classList.add('is-active');
+        audioButton.textContent = '🔇 Silenciar';
+        audioButton.setAttribute('aria-label', 'Silenciar video');
+      } catch (error) {
+        audioButton.textContent = 'Toca para activar';
+      }
+    }
+
+    function disableCreatorAudio(card) {
+      const video = getCreatorVideo(card);
+      const audioButton = getCreatorAudioButton(card);
+      if (!video || !audioButton) return;
+
+      video.muted = true;
+      video.setAttribute('muted', '');
+      audioButton.classList.remove('is-active');
+      audioButton.textContent = '🔊 Activar audio';
+      audioButton.setAttribute('aria-label', 'Activar audio');
+    }
+
+    function closeOtherCreatorCards(activeCard) {
+      document.querySelectorAll('.creator-card').forEach(otherCard => {
+        if (otherCard !== activeCard) {
+          otherCard.classList.remove('is-flipped');
+          stopCreatorVideo(otherCard);
+        }
+      });
+    }
+
+    function bindCreatorCard(card) {
+      if (card.dataset.bound === 'true') return;
+      card.dataset.bound = 'true';
+
+      const audioButton = getCreatorAudioButton(card);
+
+      card.addEventListener('mouseenter', () => {
+        playCreatorPreview(card);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (!card.classList.contains('is-flipped')) {
+          stopCreatorVideo(card);
+        }
+      });
+
+      card.addEventListener('focus', () => {
+        playCreatorPreview(card);
+      });
+
+      card.addEventListener('click', event => {
+        if (event.target.closest('.creator-audio-btn')) return;
+
+        if (window.matchMedia('(hover: none)').matches) {
+          const willOpen = !card.classList.contains('is-flipped');
+          closeOtherCreatorCards(card);
+          card.classList.toggle('is-flipped', willOpen);
+
+          if (willOpen) {
+            playCreatorPreview(card);
+          } else {
+            stopCreatorVideo(card);
+          }
+        }
+      });
+
+      audioButton?.addEventListener('pointerdown', event => {
+        event.stopPropagation();
+      });
+
+      audioButton?.addEventListener('click', async event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        closeOtherCreatorCards(card);
+        card.classList.add('is-flipped');
+
+        const video = getCreatorVideo(card);
+        if (!video) return;
+
+        if (video.muted) {
+          await enableCreatorAudio(card);
+        } else {
+          disableCreatorAudio(card);
+        }
+      });
+    }
+
+    const originalCreatorCards = Array.from(
+      creatorCarousel.querySelectorAll('.creator-card')
+    );
+
+    // Build a real infinite sequence:
+    // duplicate the complete set before and after the original set.
+    const beforeFragment = document.createDocumentFragment();
+    const afterFragment = document.createDocumentFragment();
+
+    originalCreatorCards.forEach(card => {
+      const beforeClone = card.cloneNode(true);
+      const afterClone = card.cloneNode(true);
+
+      beforeClone.removeAttribute('id');
+      afterClone.removeAttribute('id');
+
+      beforeFragment.appendChild(beforeClone);
+      afterFragment.appendChild(afterClone);
+    });
+
+    creatorCarousel.prepend(beforeFragment);
+    creatorCarousel.append(afterFragment);
+
+    const allCreatorCards = Array.from(
+      creatorCarousel.querySelectorAll('.creator-card')
+    );
+
+    allCreatorCards.forEach(bindCreatorCard);
+
+    const originalCount = originalCreatorCards.length;
+    let currentCreatorIndex = originalCount;
+    let creatorStep = 0;
+    let creatorSetWidth = 0;
+    let isInfiniteResetting = false;
+
+    function measureCreatorCarousel() {
+      const first = allCreatorCards[0];
+      const second = allCreatorCards[1];
+
+      if (!first || !second) return;
+
+      creatorStep = second.offsetLeft - first.offsetLeft;
+      creatorSetWidth = creatorStep * originalCount;
+    }
+
+    function placeCarouselInMiddle() {
+      measureCreatorCarousel();
+
+      currentCreatorIndex = originalCount;
+      creatorCarousel.scrollLeft = creatorStep * originalCount;
+    }
+
+    function moveCreator(direction) {
+      if (!creatorStep) measureCreatorCarousel();
+
+      currentCreatorIndex += direction;
+
+      creatorCarousel.scrollTo({
+        left: creatorStep * currentCreatorIndex,
+        behavior: 'smooth'
+      });
+    }
+
+    creatorPrev?.addEventListener('click', () => {
+      moveCreator(-1);
+    });
+
+    creatorNext?.addEventListener('click', () => {
+      moveCreator(1);
+    });
+
+    let infiniteScrollTimer;
+
+    creatorCarousel.addEventListener('scroll', () => {
+      if (isInfiniteResetting || !creatorStep) return;
+
+      clearTimeout(infiniteScrollTimer);
+
+      infiniteScrollTimer = setTimeout(() => {
+        const approximateIndex = Math.round(
+          creatorCarousel.scrollLeft / creatorStep
+        );
+
+        currentCreatorIndex = approximateIndex;
+
+        // When reaching either duplicated set, jump invisibly
+        // to the equivalent card in the middle/original set.
+        if (currentCreatorIndex < originalCount) {
+          isInfiniteResetting = true;
+          currentCreatorIndex += originalCount;
+          creatorCarousel.scrollLeft = creatorStep * currentCreatorIndex;
+          requestAnimationFrame(() => {
+            isInfiniteResetting = false;
+          });
+        } else if (currentCreatorIndex >= originalCount * 2) {
+          isInfiniteResetting = true;
+          currentCreatorIndex -= originalCount;
+          creatorCarousel.scrollLeft = creatorStep * currentCreatorIndex;
+          requestAnimationFrame(() => {
+            isInfiniteResetting = false;
+          });
+        }
+      }, 90);
+    }, { passive: true });
+
+    window.addEventListener('load', placeCarouselInMiddle);
+    window.addEventListener('resize', () => {
+      clearTimeout(infiniteScrollTimer);
+      setTimeout(placeCarouselInMiddle, 120);
+    });
+
+    requestAnimationFrame(placeCarouselInMiddle);
+
+    let isCreatorDragging = false;
+    let creatorDragStartX = 0;
+    let creatorStartScrollLeft = 0;
+
+    creatorCarousel?.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse') {
+        isCreatorDragging = true;
+        creatorDragStartX = event.clientX;
+        creatorStartScrollLeft = creatorCarousel.scrollLeft;
+        creatorCarousel.setPointerCapture(event.pointerId);
+      }
+    });
+
+    creatorCarousel?.addEventListener('pointermove', event => {
+      if (!isCreatorDragging) return;
+      creatorCarousel.scrollLeft = creatorStartScrollLeft - (event.clientX - creatorDragStartX);
+    });
+
+    creatorCarousel?.addEventListener('pointerup', () => {
+      isCreatorDragging = false;
+    });
+
+    creatorCarousel?.addEventListener('pointercancel', () => {
+      isCreatorDragging = false;
+    });
+
+    const coverageModal = document.getElementById('coverageModal');
+    const coverageDialog = document.getElementById('coverageDialog');
+    const coverageClose = document.getElementById('coverageClose');
+    const coverageKicker = document.getElementById('coverageKicker');
+    const coverageTitle = document.getElementById('coverageTitle');
+    const coverageDek = document.getElementById('coverageDek');
+    const coverageMeta = document.getElementById('coverageMeta');
+    const coverageText = document.getElementById('coverageText');
+    const coverageGallery = document.getElementById('coverageGallery');
+    const coverageAuthorPhoto = document.getElementById('coverageAuthorPhoto');
+    const coverageAuthorName = document.getElementById('coverageAuthorName');
+    const coverageAuthorRole = document.getElementById('coverageAuthorRole');
+    const coverageAuthorBio = document.getElementById('coverageAuthorBio');
+    const coverageCards = document.querySelectorAll('.coverage-card[data-coverage-open]');
+
+    const coverageContent = {
+      powerup: {
+        theme: 'powerup',
+        image: 'imagenes/cobertura-powerup.jpg',
+        kicker: 'Gaming',
+        title: 'Por qué Polinesios Power Up marca un nuevo momento para Los Polinesios',
+        dek: 'El lanzamiento en Roblox no solo celebra 15 años de trayectoria: también convierte a su comunidad en parte de una experiencia interactiva mucho más ambiciosa.',
+        meta: 'Julio 16, 2026 • Max Leyva',
+        authorName: 'Max Leyva',
+        authorRole: 'Editor y creador de Revista Fan',
+        authorBio: 'Editor y creador de Revista Fan. Sigue de cerca la cultura pop, los lanzamientos digitales y las historias que conectan con nuevas generaciones desde un enfoque visual, cercano y entretenido.',
+        authorImage: 'imagenes/max-leyva.jpg',
+        paragraphs: [
+          'Los Polinesios estrenaron su videojuego oficial en Roblox bajo el nombre Polinesios Power Up, en un lanzamiento pensado para celebrar sus 15 años en internet y el Día del Polinesio.',
+          'La propuesta lleva su universo digital a un formato más inmersivo y conecta con una audiencia que ya consume entretenimiento desde espacios interactivos. Más que una colaboración puntual, se siente como una expansión natural de su marca personal.',
+          'Para Revista Fan, este lanzamiento muestra cómo los creadores digitales ya no solo generan contenido: también construyen experiencias completas para su comunidad.'
+        ],
+        gallery: [
+          ['imagenes/cobertura-powerup-1.jpg', 'Momento destacado del lanzamiento.'],
+          ['imagenes/cobertura-powerup-2.jpg', 'El universo de Polinesios Power Up en Roblox.'],
+          ['imagenes/cobertura-powerup-3.jpg', 'Una celebración por sus 15 años de trayectoria.']
+        ]
+      },
+      kilo: {
+        theme: 'kilo',
+        image: 'imagenes/cobertura-kilo.jpg',
+        kicker: 'Impacto social',
+        title: 'Cómo la campaña de Un Kilo de Ayuda suma a Los Polinesios desde otro lugar',
+        dek: 'La campaña de aniversario los presenta como embajadores y lleva el mensaje a salas de cine con un formato más visible y cercano.',
+        meta: '2026 • Max Leyva',
+        authorName: 'Max Leyva',
+        authorRole: 'Editor y creador de Revista Fan',
+        authorBio: 'Max Leyva impulsa Revista Fan con una línea editorial enfocada en entretenimiento, creadores y colaboraciones que conectan con audiencias jóvenes desde una mirada auténtica y actual.',
+        authorImage: 'imagenes/max-leyva.jpg',
+        paragraphs: [
+          'Los Polinesios se integraron como nuevos embajadores de Un Kilo de Ayuda, participando en la campaña de aniversario y amplificando su visibilidad desde el entorno digital.',
+          'La colaboración también incluyó un cineminuto especial en cines, llevando la campaña a un formato de mayor alcance y conectando con audiencias fuera de redes sociales.',
+          'Desde una mirada editorial, esta cobertura mezcla entretenimiento, influencia digital y causa social en un formato claro, actual y fácil de comunicar.'
+        ],
+        gallery: [
+          ['imagenes/cobertura-kilo-1.jpg', 'Los Polinesios dentro de la campaña de aniversario.'],
+          ['imagenes/cobertura-kilo-2.jpg', 'La campaña se extiende más allá de redes sociales.'],
+          ['imagenes/cobertura-kilo-3.jpg', 'El cineminuto especial lleva el mensaje a salas de cine.']
+        ]
+      }
+    };
+
+    function openCoverageModal(key) {
+      const item = coverageContent[key];
+      if (!item) return;
+
+      coverageDialog.classList.remove('powerup', 'kilo');
+      coverageDialog.classList.add(item.theme);
+      coverageKicker.textContent = item.kicker;
+      coverageTitle.textContent = item.title;
+      coverageDek.textContent = item.dek;
+      coverageMeta.textContent = item.meta;
+      coverageText.innerHTML = item.paragraphs.map(text => `<p>${text}</p>`).join('');
+      coverageGallery.innerHTML = item.gallery.map(([src, caption], index) => `
+        <figure>
+          <img src="${src}" alt="${item.title} ${index + 1}" loading="lazy">
+          <figcaption>${caption}</figcaption>
+        </figure>
+      `).join('');
+      coverageAuthorName.textContent = item.authorName || 'Max Leyva';
+      coverageAuthorRole.textContent = item.authorRole || 'Editor y creador de Revista Fan';
+      coverageAuthorBio.textContent = item.authorBio || 'Creador y voz detrás de Revista Fan.';
+      coverageAuthorPhoto.style.backgroundImage = item.authorImage ? `url('${item.authorImage}')` : 'none';
+
+      coverageModal.classList.add('is-open');
+      coverageModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCoverageModal() {
+      coverageModal.classList.remove('is-open');
+      coverageModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    coverageCards.forEach(card => {
+      card.addEventListener('click', () => openCoverageModal(card.dataset.coverageOpen));
+      card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openCoverageModal(card.dataset.coverageOpen);
+        }
+      });
+    });
+
+    coverageClose?.addEventListener('click', closeCoverageModal);
+
+    coverageModal?.addEventListener('click', event => {
+      if (event.target === coverageModal) {
+        closeCoverageModal();
+      }
+    });
+
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && coverageModal?.classList.contains('is-open')) {
+        closeCoverageModal();
+      }
+    });
+
+
+    const fanEditionsStage = document.getElementById('fanEditionsStage');
+    const fanEditionCards = document.querySelectorAll('.fan-edition-card[data-edition]');
+    const fanEditionsMeta = document.getElementById('fanEditionsMeta');
+    const fanEditionReader = document.getElementById('fanEditionReader');
+    const fanCoverflow = document.getElementById('fanCoverflow');
+    const fanCoverflowTrack = document.getElementById('fanCoverflowTrack');
+    const fanEditionPrev = document.getElementById('fanEditionPrev');
+    const fanEditionNext = document.getElementById('fanEditionNext');
+    const fanEditionClose = document.getElementById('fanEditionClose');
+    const fanEditionReaderTitle = document.getElementById('fanEditionReaderTitle');
+    const fanEditionReaderSubtitle = document.getElementById('fanEditionReaderSubtitle');
+    const fanEditionCreditName = document.getElementById('fanEditionCreditName');
+    const fanEditionCounter = document.getElementById('fanEditionCounter');
+    const fanEditionThumbs = document.getElementById('fanEditionThumbs');
+
+    const fanEditionContent = {
+      julio: {
+        title: 'Volumen 1',
+        subtitle: 'Bex Benedex · El Novaly · Estebanwoo · Abril Cuentos · Dany Steria · Andrés Gueda',
+        pages: [
+          'imagenes/edicion-julio-1.jpg','imagenes/edicion-julio-2.jpg','imagenes/edicion-julio-3.jpg',
+          'imagenes/edicion-julio-4.jpg','imagenes/edicion-julio-5.jpg','imagenes/edicion-julio-6.jpg'
+        ]
+      },
+      agosto: {
+        title: 'Volumen 2',
+        subtitle: 'Mau Topete · Pepin Loyin · Abelardo Bobadilla · Bicho Orozco',
+        pages: [
+          'imagenes/edicion-agosto-1.jpg','imagenes/edicion-agosto-2.jpg','imagenes/edicion-agosto-3.jpg',
+          'imagenes/edicion-agosto-4.jpg','imagenes/edicion-agosto-5.jpg','imagenes/edicion-agosto-6.jpg'
+        ]
+      },
+      septiembre: {
+        title: 'Volumen 3',
+        subtitle: 'Alberto de la Garza',
+        pages: [
+          'imagenes/edicion-septiembre-1.jpg'
+        ]
+      }
+    };
+
+    let currentFanEdition = null;
+    let currentFanImage = 0;
+    let fanEditionHoverTimer = null;
+    let fanEditionLeaveTimer = null;
+    let coverflowDrag = null;
+    let coverflowFloat = 0;
+
+    function positionCoverflowCards() {
+      if (!currentFanEdition || !fanCoverflowTrack) return;
+      const cards = [...fanCoverflowTrack.querySelectorAll('.fan-coverflow-card')];
+      const spacing = Math.min(235, Math.max(118, (fanCoverflow?.clientWidth || 900) * .195));
+
+      cards.forEach((card, index) => {
+        const delta = index - (currentFanImage + coverflowFloat);
+        const abs = Math.abs(delta);
+        const x = delta * spacing;
+        const rotate = Math.max(-44, Math.min(44, delta * -12));
+        const scale = Math.max(.72, 1 - abs * .12);
+        const z = -abs * 100;
+        const opacity = Math.max(.16, 1 - abs * .22);
+        card.style.transform = `translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${rotate}deg) scale(${scale})`;
+        card.style.opacity = opacity;
+        card.style.filter = abs < .45 ? 'saturate(1)' : `saturate(${Math.max(.48, 1 - abs*.14)}) brightness(${Math.max(.58, 1 - abs*.10)})`;
+        card.style.zIndex = String(30 - Math.round(abs * 3));
+        card.classList.toggle('is-active', index === currentFanImage && Math.abs(coverflowFloat) < .5);
+      });
+    }
+
+    function renderFanGallery() {
+      if (!currentFanEdition) return;
+      const item = fanEditionContent[currentFanEdition];
+      const total = item.pages.length;
+      currentFanImage = Math.max(0, Math.min(currentFanImage, total - 1));
+      coverflowFloat = 0;
+
+      fanEditionReaderTitle.textContent = item.title;
+      fanEditionReaderSubtitle.textContent = item.subtitle || '';
+      if (fanEditionCreditName) fanEditionCreditName.textContent = item.photographer || 'Crédito pendiente';
+      fanEditionCounter.textContent = `${currentFanImage + 1} / ${total}`;
+      fanEditionPrev.disabled = currentFanImage === 0;
+      fanEditionNext.disabled = currentFanImage === total - 1;
+
+      fanCoverflowTrack.innerHTML = item.pages.map((src,index) => `
+        <button class="fan-coverflow-card${index === currentFanImage ? ' is-active' : ''}" type="button" data-image="${index}" aria-label="Ver fotografía ${index + 1}">
+          <img src="${src}" alt="${item.title}, fotografía ${index + 1}" draggable="false">
+        </button>
+      `).join('');
+
+      fanEditionThumbs.innerHTML = item.pages.map((_,index) => `
+        <button class="fan-coverflow-dot${index === currentFanImage ? ' is-active' : ''}" type="button" data-image="${index}" aria-label="Ir a fotografía ${index + 1}"></button>
+      `).join('');
+
+      fanCoverflowTrack.querySelectorAll('.fan-coverflow-card').forEach(card => {
+        card.addEventListener('click', () => showFanImage(Number(card.dataset.image)));
+      });
+      fanEditionThumbs.querySelectorAll('.fan-coverflow-dot').forEach(dot => {
+        dot.addEventListener('click', () => showFanImage(Number(dot.dataset.image)));
+      });
+      requestAnimationFrame(positionCoverflowCards);
+    }
+
+    function showFanImage(index) {
+      if (!currentFanEdition) return;
+      const item = fanEditionContent[currentFanEdition];
+      index = Math.max(0, Math.min(index, item.pages.length - 1));
+      if (index === currentFanImage) return;
+      currentFanImage = index;
+      coverflowFloat = 0;
+      fanEditionCounter.textContent = `${currentFanImage + 1} / ${item.pages.length}`;
+      fanEditionPrev.disabled = currentFanImage === 0;
+      fanEditionNext.disabled = currentFanImage === item.pages.length - 1;
+      fanEditionThumbs.querySelectorAll('.fan-coverflow-dot').forEach((dot,i)=>dot.classList.toggle('is-active', i===currentFanImage));
+      positionCoverflowCards();
+    }
+
+    function beginCoverflowDrag(event) {
+      if (!currentFanEdition) return;
+      if (event.button !== undefined && event.button !== 0) return;
+      coverflowDrag = { startX:event.clientX, lastX:event.clientX, moved:false };
+      fanCoverflow.classList.add('is-dragging');
+      fanCoverflow.setPointerCapture?.(event.pointerId);
+    }
+
+    function moveCoverflowDrag(event) {
+      if (!coverflowDrag || !currentFanEdition) return;
+      const dx = event.clientX - coverflowDrag.startX;
+      if (Math.abs(dx) > 6) coverflowDrag.moved = true;
+      const width = Math.max(220, fanCoverflow.clientWidth * .34);
+      coverflowFloat = Math.max(-1.15, Math.min(1.15, -dx / width));
+      positionCoverflowCards();
+      coverflowDrag.lastX = event.clientX;
+    }
+
+    function endCoverflowDrag() {
+      if (!coverflowDrag || !currentFanEdition) return;
+      const item = fanEditionContent[currentFanEdition];
+      if (Math.abs(coverflowFloat) > .22) {
+        currentFanImage += coverflowFloat > 0 ? 1 : -1;
+        currentFanImage = Math.max(0, Math.min(currentFanImage, item.pages.length - 1));
+      }
+      coverflowFloat = 0;
+      coverflowDrag = null;
+      fanCoverflow.classList.remove('is-dragging');
+      fanEditionCounter.textContent = `${currentFanImage + 1} / ${item.pages.length}`;
+      fanEditionPrev.disabled = currentFanImage === 0;
+      fanEditionNext.disabled = currentFanImage === item.pages.length - 1;
+      fanEditionThumbs.querySelectorAll('.fan-coverflow-dot').forEach((dot,i)=>dot.classList.toggle('is-active', i===currentFanImage));
+      positionCoverflowCards();
+    }
+
+    function openFanEdition(key) {
+      if (!fanEditionContent[key]) return;
+      currentFanEdition = key;
+      currentFanImage = 0;
+      renderFanGallery();
+      fanEditionReader.classList.add('is-open');
+      fanEditionReader.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFanEdition() {
+      fanEditionReader.classList.remove('is-open');
+      fanEditionReader.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      currentFanEdition = null;
+      currentFanImage = 0;
+    }
+
+
+    fanCoverflow?.addEventListener('pointerdown', beginCoverflowDrag);
+    fanCoverflow?.addEventListener('pointermove', moveCoverflowDrag);
+    fanCoverflow?.addEventListener('pointerup', endCoverflowDrag);
+    fanCoverflow?.addEventListener('pointercancel', endCoverflowDrag);
+    fanCoverflow?.addEventListener('wheel', event => {
+      if (!currentFanEdition) return;
+      if (Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
+      event.preventDefault();
+      showFanImage(currentFanImage + (event.deltaY > 0 ? 1 : -1));
+    }, { passive:false });
+    window.addEventListener('resize', () => {
+      if (fanEditionReader?.classList.contains('is-open')) positionCoverflowCards();
+    });
+
+    function updateFanEditionsStage() {
+      if (!fanEditionsStage) return;
+      const totalCards = fanEditionCards.length;
+      fanEditionsStage.classList.toggle('has-many', totalCards > 3);
+      if (fanEditionsMeta) {
+        fanEditionsMeta.textContent = '2026';
+      }
+      if (totalCards > 3) {
+        fanEditionsStage.classList.remove('focus-left', 'focus-center', 'focus-right');
+      }
+    }
+
+    function setEditionFocus(card) {
+      if (fanEditionsStage?.classList.contains('has-many')) return;
+      clearTimeout(fanEditionLeaveTimer);
+      clearTimeout(fanEditionHoverTimer);
+      fanEditionHoverTimer = setTimeout(() => {
+        const focusClass = card.dataset.edition === 'julio'
+          ? 'focus-left'
+          : card.dataset.edition === 'agosto'
+            ? 'focus-center'
+            : 'focus-right';
+        fanEditionsStage?.classList.remove('focus-left', 'focus-center', 'focus-right');
+        fanEditionsStage?.classList.add(focusClass);
+      }, 190);
+    }
+
+    updateFanEditionsStage();
+
+    fanEditionCards.forEach(card => {
+      card.addEventListener('mouseenter', () => setEditionFocus(card));
+      card.addEventListener('focus', () => setEditionFocus(card));
+      card.addEventListener('click', () => openFanEdition(card.dataset.edition));
+      card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openFanEdition(card.dataset.edition);
+        }
+      });
+    });
+
+    fanEditionsStage?.addEventListener('mouseleave', () => {
+      clearTimeout(fanEditionHoverTimer);
+      clearTimeout(fanEditionLeaveTimer);
+      fanEditionLeaveTimer = setTimeout(() => { if (!fanEditionsStage.classList.contains('has-many')) fanEditionsStage.classList.remove('focus-left', 'focus-center', 'focus-right'); }, 260);
+    });
+
+    fanEditionPrev?.addEventListener('click', () => showFanImage(currentFanImage - 1));
+    fanEditionNext?.addEventListener('click', () => showFanImage(currentFanImage + 1));
+    fanEditionClose?.addEventListener('click', closeFanEdition);
+    fanEditionReader?.addEventListener('click', event => {
+      if (event.target === fanEditionReader) closeFanEdition();
+    });
+
+    window.addEventListener('keydown', event => {
+      if (!fanEditionReader?.classList.contains('is-open')) return;
+      if (event.key === 'ArrowRight') showFanImage(currentFanImage + 1);
+      if (event.key === 'ArrowLeft') showFanImage(currentFanImage - 1);
+      if (event.key === 'Escape') closeFanEdition();
+    });
+
+</script>
+
+</body>
+</html>
